@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, LayoutDashboard } from "lucide-react";
+import { Menu, X, LayoutDashboard, ChevronDown } from "lucide-react";
 import LogoIcon from "@/components/LogoIcon";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
@@ -12,6 +12,18 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(e.target as Node)) {
+        setLangMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   const [user, setUser] = useState<{ email?: string } | null>(null);
   const supabase = createClient();
   const { locale, setLocale, t } = useLanguage();
@@ -71,13 +83,36 @@ export default function Navbar() {
 
           {/* Desktop CTA actions */}
           <div className="hidden md:flex items-center gap-4">
-            <button
-              onClick={() => setLocale(locale === "en" ? "fr" : "en")}
-              className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all"
-              aria-label="Switch language"
-            >
-              {locale === "en" ? "🇫🇷 FR" : "🇬🇧 EN"}
-            </button>
+            <div className="relative" ref={langMenuRef}>
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all"
+                aria-label="Switch language"
+              >
+                {locale === "en" ? "🇬🇧 EN" : "🇫🇷 FR"}
+                <ChevronDown className={`h-3 w-3 transition-transform ${langMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+              {langMenuOpen && (
+                <div className="absolute right-0 mt-2 w-32 rounded-xl border border-slate-100 bg-white shadow-lg py-1 z-50">
+                  <button
+                    onClick={() => { setLocale("en"); setLangMenuOpen(false); }}
+                    className={`w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold transition-colors ${
+                      locale === "en" ? "text-accent bg-orange-50" : "text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    🇬🇧 English
+                  </button>
+                  <button
+                    onClick={() => { setLocale("fr"); setLangMenuOpen(false); }}
+                    className={`w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold transition-colors ${
+                      locale === "fr" ? "text-accent bg-orange-50" : "text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    🇫🇷 Français
+                  </button>
+                </div>
+              )}
+            </div>
             {user ? (
               <>
                 <Link
@@ -147,13 +182,24 @@ export default function Navbar() {
             })}
           </div>
           <div className="border-t border-slate-100 pt-4 flex flex-col gap-3">
-            <button
-              onClick={() => setLocale(locale === "en" ? "fr" : "en")}
-              className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all"
-              aria-label="Switch language"
-            >
-              {locale === "en" ? "🇫🇷 FR" : "🇬🇧 EN"}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => { setLocale("en"); setMobileMenuOpen(false); }}
+                className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg border py-2.5 text-sm font-semibold transition-colors ${
+                  locale === "en" ? "border-accent text-accent bg-orange-50" : "border-slate-200 text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                🇬🇧 EN
+              </button>
+              <button
+                onClick={() => { setLocale("fr"); setMobileMenuOpen(false); }}
+                className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg border py-2.5 text-sm font-semibold transition-colors ${
+                  locale === "fr" ? "border-accent text-accent bg-orange-50" : "border-slate-200 text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                🇫🇷 FR
+              </button>
+            </div>
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
