@@ -10,7 +10,8 @@ const translations: Record<Locale, Record<string, string>> = {
     "nav.dashboard": "Dashboard",
     "nav.signIn": "Sign In",
     "nav.signOut": "Sign Out",
-    "nav.getStarted": "Get Started",
+    "nav.subscribe": "Subscribe",
+    "nav.getStarted": "Subscribe",
 
     // Hero
     "hero.badge": "AI Built for Real Estate",
@@ -296,9 +297,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "nav.pricing": "Tarifs",
     "nav.faq": "FAQ",
     "nav.dashboard": "Tableau de bord",
-    "nav.signIn": "Connexion",
+    "nav.signIn": "Se connecter",
     "nav.signOut": "Déconnexion",
-    "nav.getStarted": "Commencer",
+    "nav.subscribe": "S'abonner",
+    "nav.getStarted": "S'abonner",
 
     // Hero
     "hero.badge": "L'IA dédiée aux professionnels de l'immobilier",

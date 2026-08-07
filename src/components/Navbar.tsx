@@ -137,15 +137,15 @@ export default function Navbar() {
               <>
                 <Link
                   href="/login"
-                  className="text-sm font-medium text-slate-700 hover:text-accent px-3 py-2 transition-colors"
+                  className="text-sm font-semibold text-slate-700 hover:text-accent px-3 py-2 transition-colors"
                 >
                   {t("nav.signIn")}
                 </Link>
                 <Link
-                  href="/login?signUp=true"
+                  href="/prices"
                   className="rounded-full bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-5 py-2.5 shadow-lg shadow-orange-500/15 transition-all hover:shadow-orange-500/25 active:scale-[0.98]"
                 >
-                  {t("nav.getStarted")}
+                  {t("nav.subscribe")}
                 </Link>
               </>
             )}
@@ -166,8 +166,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-100 bg-white px-4 py-4 space-y-3 shadow-lg transition-all">
-
+        <div className="md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3">
           <div className="space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -176,7 +175,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block rounded-lg px-3 py-2.5 text-base font-medium transition-colors hover:bg-slate-50 hover:text-accent ${
+                  className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${
                     isActive ? "text-accent bg-slate-50/50 font-semibold" : "text-slate-600"
                   }`}
                 >
@@ -212,11 +211,11 @@ export default function Navbar() {
               {t("nav.signIn")}
             </Link>
             <Link
-              href="/login?signUp=true"
+              href="/prices"
               onClick={() => setMobileMenuOpen(false)}
               className="flex justify-center rounded-lg bg-accent py-2.5 text-base font-semibold text-white shadow-md hover:bg-accent-hover transition-colors"
             >
-              {t("nav.getStarted")}
+              {t("nav.subscribe")}
             </Link>
           </div>
         </div>
