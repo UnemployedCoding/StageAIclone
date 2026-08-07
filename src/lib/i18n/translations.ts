@@ -14,7 +14,6 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Hero
     "hero.badge": "AI Built for Real Estate",
-    "hero.australian": "🇦🇺 100% Australian Owned & Operated",
     "hero.title": "Real Estate Photo Transformation",
     "hero.titleHighlight": "in seconds",
     "hero.stat1": "Empty listings get",
@@ -283,7 +282,6 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Hero
     "hero.badge": "L'IA dédiée aux professionnels de l'immobilier",
-    "hero.australian": "🇦🇺 Entreprise 100% australienne",
     "hero.title": "Home Staging Virtuel par IA",
     "hero.titleHighlight": "en quelques secondes",
     "hero.stat1": "Les annonces non meublées reçoivent",

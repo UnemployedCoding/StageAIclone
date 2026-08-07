@@ -150,9 +150,6 @@ export default function Home() {
                   <Sparkles className="h-3.5 w-3.5 fill-current" />
                   {t("hero.badge")}
                 </div>
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-semibold text-slate-700 border border-slate-200/50">
-                  {t("hero.australian")}
-                </div>
               </div>
               <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-primary leading-[1.15]">
                 {t("hero.title")}{" "}
