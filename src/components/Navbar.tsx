@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, LayoutDashboard, ChevronDown } from "lucide-react";
+import { Menu, X, LayoutDashboard, ChevronDown, Sparkles } from "lucide-react";
 import LogoIcon from "@/components/LogoIcon";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
@@ -136,6 +136,13 @@ export default function Navbar() {
             ) : (
               <>
                 <Link
+                  href="/gallery"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95"
+                >
+                  <Sparkles className="h-3.5 w-3.5 fill-current animate-pulse text-accent" />
+                  <span>{t("nav.seeDemo")}</span>
+                </Link>
+                <Link
                   href="/login"
                   className="text-sm font-semibold text-slate-700 hover:text-accent px-3 py-2 transition-colors"
                 >
@@ -203,6 +210,14 @@ export default function Navbar() {
                 🇫🇷 FR
               </button>
             </div>
+            <Link
+              href="/gallery"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-lg border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors"
+            >
+              <Sparkles className="h-4 w-4 fill-current animate-pulse text-accent" />
+              <span>{t("nav.seeDemo")}</span>
+            </Link>
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
