@@ -56,26 +56,26 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo Section */}
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2.5">
+          <div className="flex items-center shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <LogoIcon size={32} />
-              <span className="font-display text-xl font-bold tracking-tight text-primary">
+              <span className="font-display text-xl font-bold tracking-tight text-primary whitespace-nowrap">
                 Stage<span className="text-accent">Lumen</span>
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 shrink-0">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-accent ${
+                  className={`text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
                     isActive ? "text-accent font-semibold" : "text-slate-600"
                   }`}
                 >
@@ -86,11 +86,11 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop CTA actions */}
-          <div className="hidden md:flex items-center gap-4">
-            <div className="relative" ref={langMenuRef}>
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
+            <div className="relative shrink-0" ref={langMenuRef}>
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all"
+                className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all whitespace-nowrap"
                 aria-label="Switch language"
               >
                 {locale === "en" ? "🇬🇧 EN" : "🇫🇷 FR"}
@@ -121,14 +121,14 @@ export default function Navbar() {
               <>
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-accent px-3 py-2 transition-colors"
+                  className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-accent px-3 py-2 transition-colors whitespace-nowrap shrink-0"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   {t("nav.dashboard")}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-sm font-semibold px-5 py-2.5 transition-all"
+                  className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-sm font-semibold px-4.5 py-2 transition-all whitespace-nowrap shrink-0"
                 >
                   {t("nav.signOut")}
                 </button>
@@ -137,20 +137,20 @@ export default function Navbar() {
               <>
                 <Link
                   href="/gallery"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
                 >
                   <Sparkles className="h-3.5 w-3.5 fill-current animate-pulse text-accent" />
                   <span>{t("nav.seeDemo")}</span>
                 </Link>
                 <Link
                   href="/login"
-                  className="text-sm font-semibold text-slate-700 hover:text-accent px-3 py-2 transition-colors"
+                  className="text-sm font-semibold text-slate-700 hover:text-accent px-3 py-2 transition-colors whitespace-nowrap shrink-0"
                 >
                   {t("nav.signIn")}
                 </Link>
                 <Link
                   href="/prices"
-                  className="rounded-full bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-5 py-2.5 shadow-lg shadow-orange-500/15 transition-all hover:shadow-orange-500/25 active:scale-[0.98]"
+                  className="rounded-full bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-4.5 py-2 shadow-lg shadow-orange-500/15 transition-all hover:shadow-orange-500/25 active:scale-[0.98] whitespace-nowrap shrink-0"
                 >
                   {t("nav.subscribe")}
                 </Link>
@@ -159,7 +159,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden">
+          <div className="flex lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="inline-flex items-center justify-center rounded-lg p-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
@@ -173,7 +173,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3">
+        <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3">
           <div className="space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -210,28 +210,49 @@ export default function Navbar() {
                 🇫🇷 FR
               </button>
             </div>
-            <Link
-              href="/gallery"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-lg border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors"
-            >
-              <Sparkles className="h-4 w-4 fill-current animate-pulse text-accent" />
-              <span>{t("nav.seeDemo")}</span>
-            </Link>
-            <Link
-              href="/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex justify-center rounded-lg border border-slate-200 py-2.5 text-base font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
-            >
-              {t("nav.signIn")}
-            </Link>
-            <Link
-              href="/prices"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex justify-center rounded-lg bg-accent py-2.5 text-base font-semibold text-white shadow-md hover:bg-accent-hover transition-colors"
-            >
-              {t("nav.subscribe")}
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-lg bg-orange-50 text-accent font-semibold py-2.5 text-base"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  {t("nav.dashboard")}
+                </Link>
+                <button
+                  onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
+                  className="flex justify-center rounded-lg border border-slate-200 py-2.5 text-base font-semibold text-slate-600 hover:text-red-500 transition-colors"
+                >
+                  {t("nav.signOut")}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/gallery"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-lg border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors"
+                >
+                  <Sparkles className="h-4 w-4 fill-current animate-pulse text-accent" />
+                  <span>{t("nav.seeDemo")}</span>
+                </Link>
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex justify-center rounded-lg border border-slate-200 py-2.5 text-base font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                >
+                  {t("nav.signIn")}
+                </Link>
+                <Link
+                  href="/prices"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex justify-center rounded-lg bg-accent py-2.5 text-base font-semibold text-white shadow-md hover:bg-accent-hover transition-colors"
+                >
+                  {t("nav.subscribe")}
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

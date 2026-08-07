@@ -228,15 +228,16 @@ export default function GalleryPage() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
 
         {/* ── Heading ── */}
-        <div className="text-center mb-10 space-y-3 max-w-3xl mx-auto">
+        <div className="text-center mb-10 space-y-3 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-3.5 py-1.5 text-xs font-bold text-accent border border-orange-200/60 shadow-sm">
             <Sparkles className="h-3.5 w-3.5 fill-current text-accent" />
             <span>{t("gallery.badge")}</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-primary">
-            {t("gallery.title")}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-primary">
+            <span>{t("gallery.titlePrefix")}</span>{" "}
+            <span className="sm:whitespace-nowrap">{t("gallery.titleSuffix")}</span>
           </h1>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             {t("gallery.subtitle")}
           </p>
         </div>

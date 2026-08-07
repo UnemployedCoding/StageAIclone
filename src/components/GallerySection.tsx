@@ -123,15 +123,16 @@ export default function GallerySection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Heading ── */}
-        <div className="text-center mb-10 space-y-3 max-w-3xl mx-auto">
+        <div className="text-center mb-10 space-y-3 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold text-orange-400 border border-white/10 shadow-sm">
             <Sparkles className="h-3.5 w-3.5 fill-current text-orange-400" />
             <span>{t("gallery.badge")}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-            {t("gallery.title")}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+            <span>{t("gallery.titlePrefix")}</span>{" "}
+            <span className="sm:whitespace-nowrap">{t("gallery.titleSuffix")}</span>
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             {t("gallery.subtitle")}
           </p>
         </div>
