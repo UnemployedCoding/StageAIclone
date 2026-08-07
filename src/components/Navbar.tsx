@@ -57,40 +57,41 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          {/* Logo Section */}
-          <div className="flex items-center shrink-0">
+          
+          {/* Left Group: Logo + Desktop Links (grouped together so they never overlap) */}
+          <div className="flex items-center gap-8 xl:gap-10 shrink-0">
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <LogoIcon size={32} />
               <span className="font-display text-xl font-bold tracking-tight text-primary whitespace-nowrap">
                 Stage<span className="text-accent">Lumen</span>
               </span>
             </Link>
+
+            {/* Desktop Navigation links (xl+) */}
+            <nav className="hidden xl:flex items-center gap-6 xl:gap-8 shrink-0">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
+                      isActive ? "text-accent font-semibold" : "text-slate-600"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
 
-          {/* Desktop Navigation links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 shrink-0">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
-                    isActive ? "text-accent font-semibold" : "text-slate-600"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Desktop CTA actions */}
-          <div className="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
+          {/* Desktop Right CTA actions (xl+) */}
+          <div className="hidden xl:flex items-center gap-3 xl:gap-4 shrink-0">
             <div className="relative shrink-0" ref={langMenuRef}>
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all whitespace-nowrap"
+                className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all whitespace-nowrap cursor-pointer"
                 aria-label="Switch language"
               >
                 {locale === "en" ? "🇬🇧 EN" : "🇫🇷 FR"}
@@ -100,7 +101,7 @@ export default function Navbar() {
                 <div className="absolute right-0 mt-2 w-32 rounded-xl border border-slate-100 bg-white shadow-lg py-1 z-50">
                   <button
                     onClick={() => { setLocale("en"); setLangMenuOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold transition-colors ${
+                    className={`w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold transition-colors cursor-pointer ${
                       locale === "en" ? "text-accent bg-orange-50" : "text-slate-600 hover:bg-slate-50"
                     }`}
                   >
@@ -108,7 +109,7 @@ export default function Navbar() {
                   </button>
                   <button
                     onClick={() => { setLocale("fr"); setLangMenuOpen(false); }}
-                    className={`w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold transition-colors ${
+                    className={`w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold transition-colors cursor-pointer ${
                       locale === "fr" ? "text-accent bg-orange-50" : "text-slate-600 hover:bg-slate-50"
                     }`}
                   >
@@ -128,7 +129,7 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-sm font-semibold px-4.5 py-2 transition-all whitespace-nowrap shrink-0"
+                  className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-sm font-semibold px-4.5 py-2 transition-all whitespace-nowrap shrink-0 cursor-pointer"
                 >
                   {t("nav.signOut")}
                 </button>
@@ -158,22 +159,39 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex lg:hidden">
+          {/* Compact Tablet/Mobile Controls (< xl) */}
+          <div className="flex xl:hidden items-center gap-2.5 shrink-0">
+            <button
+              onClick={() => { setLocale(locale === "en" ? "fr" : "en"); }}
+              className="flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all cursor-pointer"
+              title="Toggle Language"
+            >
+              {locale === "en" ? "🇬🇧 EN" : "🇫🇷 FR"}
+            </button>
+
+            {!user && (
+              <Link
+                href="/prices"
+                className="rounded-full bg-accent hover:bg-accent-hover text-white text-xs font-bold px-3.5 py-1.5 shadow-sm transition-all whitespace-nowrap"
+              >
+                {t("nav.subscribe")}
+              </Link>
+            )}
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center rounded-lg p-2 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
+              className="inline-flex items-center justify-center rounded-lg p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer"
+              aria-label="Toggle navigation menu"
             >
-              <span className="sr-only">Open main menu</span>
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile / Tablet Menu Drawer (< xl) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3">
+        <div className="xl:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-4 shadow-xl">
           <div className="space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -182,8 +200,8 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${
-                    isActive ? "text-accent bg-slate-50/50 font-semibold" : "text-slate-600"
+                  className={`block rounded-lg px-3 py-2.5 text-base font-medium transition-colors ${
+                    isActive ? "text-accent bg-orange-50 font-semibold" : "text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   {link.name}
@@ -191,25 +209,7 @@ export default function Navbar() {
               );
             })}
           </div>
-          <div className="border-t border-slate-100 pt-4 flex flex-col gap-3">
-            <div className="flex gap-2">
-              <button
-                onClick={() => { setLocale("en"); setMobileMenuOpen(false); }}
-                className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg border py-2.5 text-sm font-semibold transition-colors ${
-                  locale === "en" ? "border-accent text-accent bg-orange-50" : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                🇬🇧 EN
-              </button>
-              <button
-                onClick={() => { setLocale("fr"); setMobileMenuOpen(false); }}
-                className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg border py-2.5 text-sm font-semibold transition-colors ${
-                  locale === "fr" ? "border-accent text-accent bg-orange-50" : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                🇫🇷 FR
-              </button>
-            </div>
+          <div className="border-t border-slate-100 pt-3 flex flex-col gap-2.5">
             {user ? (
               <>
                 <Link
@@ -222,7 +222,7 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
-                  className="flex justify-center rounded-lg border border-slate-200 py-2.5 text-base font-semibold text-slate-600 hover:text-red-500 transition-colors"
+                  className="flex justify-center rounded-lg border border-slate-200 py-2.5 text-base font-semibold text-slate-600 hover:text-red-500 transition-colors cursor-pointer"
                 >
                   {t("nav.signOut")}
                 </button>
