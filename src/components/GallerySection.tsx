@@ -2,7 +2,9 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { Sparkles } from "lucide-react";
 import GalleryDragSlider from "./GalleryDragSlider";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -89,6 +91,7 @@ const GALLERY_ITEMS = ROOM_TABS.flatMap((room) =>
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function GallerySection() {
+  const { t } = useLanguage();
   const [activeRoom, setActiveRoom] = useState("living-room");
   const [activeStyle, setActiveStyle] = useState("modern");
   const thumbsRef = useRef<HTMLDivElement>(null);
@@ -120,14 +123,16 @@ export default function GallerySection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Heading ── */}
-        <div className="text-center mb-10 space-y-3">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-            See the Transformation:{" "}
-            <span className="font-normal">Before &amp; After Gallery</span>
+        <div className="text-center mb-10 space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold text-orange-400 border border-white/10 shadow-sm">
+            <Sparkles className="h-3.5 w-3.5 fill-current text-orange-400" />
+            <span>{t("gallery.badge")}</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+            {t("gallery.title")}
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg text-balance leading-relaxed">
-            See how StageLumen transforms unappealing spaces into attractive,{" "}
-            <strong className="text-white font-bold inline-block">listing‑ready homes in seconds.</strong>
+          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+            {t("gallery.subtitle")}
           </p>
         </div>
 

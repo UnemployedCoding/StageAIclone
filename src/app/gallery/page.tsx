@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { Sparkles } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 // ─── Constants ─────────────────────────────────────────────────────────────────
@@ -227,13 +228,16 @@ export default function GalleryPage() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
 
         {/* ── Heading ── */}
-        <div className="text-center mb-10 space-y-3">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-primary">
-            <b>{t("gallery.titlePrefix")}</b> {t("gallery.titleSuffix")}
+        <div className="text-center mb-10 space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-3.5 py-1.5 text-xs font-bold text-accent border border-orange-200/60 shadow-sm">
+            <Sparkles className="h-3.5 w-3.5 fill-current text-accent" />
+            <span>{t("gallery.badge")}</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-primary">
+            {t("gallery.title")}
           </h1>
-          <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto text-balance leading-relaxed">
-            {t("gallery.subtitle")}{" "}
-            <b className="text-slate-800 inline-block">{t("gallery.subtitleBold")}</b>
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            {t("gallery.subtitle")}
           </p>
         </div>
 
