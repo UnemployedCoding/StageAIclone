@@ -35,6 +35,26 @@ export default function DashboardPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { t } = useLanguage();
 
+  // Room Types and Styles
+  const roomTypes = [
+    { id: "living_room", label: t("room.livingRoom") },
+    { id: "bedroom", label: t("room.bedroom") },
+    { id: "kitchen", label: t("room.kitchen") },
+    { id: "dining_room", label: t("room.diningRoom") },
+    { id: "home_office", label: t("room.homeOffice") },
+    { id: "outdoor", label: t("room.outdoor") },
+  ];
+
+  const styles = [
+    { id: "Modern", label: t("style.modern") },
+    { id: "Scandinavian", label: t("style.scandinavian") },
+    { id: "Luxury", label: t("style.luxury") },
+    { id: "Midcentury", label: t("style.midcentury") },
+    { id: "Coastal", label: t("style.coastal") },
+    { id: "Farmhouse", label: t("style.farmhouse") },
+    { id: "Industrial", label: t("style.industrial") },
+  ];
+
   // Nav
   const [activeTab, setActiveTab] = useState<"stage" | "history" | "billing">("stage");
 
@@ -269,7 +289,7 @@ export default function DashboardPage() {
                       onChange={(e) => setRoomType(e.target.value)}
                       className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 focus:outline-none focus:border-accent transition-colors pr-10"
                     >
-                      {ROOM_TYPES.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
+                      {roomTypes.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
                     </select>
                     <ChevronDown className="pointer-events-none absolute right-3 top-3.5 h-4 w-4 text-slate-400" />
                   </div>
@@ -279,17 +299,17 @@ export default function DashboardPage() {
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">{t("dash.interiorStyle")}</label>
                   <div className="flex flex-wrap gap-2">
-                    {STYLES.map((s) => (
+                    {styles.map((s) => (
                       <button
-                        key={s}
-                        onClick={() => setStyle(s)}
+                        key={s.id}
+                        onClick={() => setStyle(s.id)}
                         className={`rounded-lg px-4 py-2 text-sm font-semibold border transition-colors ${
-                          style === s
+                          style === s.id
                             ? "bg-accent text-white border-accent"
                             : "bg-white text-slate-600 border-slate-200 hover:border-accent hover:text-accent"
                         }`}
                       >
-                        {s}
+                        {s.label}
                       </button>
                     ))}
                   </div>

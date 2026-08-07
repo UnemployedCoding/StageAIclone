@@ -44,7 +44,8 @@ export default function PricingPage() {
   const plans = [
     {
       name: "Base",
-      photos: 15,
+      description: t("pricing.baseDesc"),
+      credits: 15,
       monthlyPrice: 39,
       features: [
         "15 " + t("pricing.creditsPerMonth"),
@@ -59,7 +60,8 @@ export default function PricingPage() {
     },
     {
       name: "Pro",
-      photos: 45,
+      description: t("pricing.proDesc"),
+      credits: 45,
       monthlyPrice: 49,
       features: [
         "45 " + t("pricing.creditsPerMonth"),
@@ -73,7 +75,8 @@ export default function PricingPage() {
     },
     {
       name: "Business",
-      photos: 150,
+      description: t("pricing.businessDesc"),
+      credits: 150,
       monthlyPrice: 149,
       features: [
         "150 " + t("pricing.creditsPerMonth"),
@@ -81,7 +84,7 @@ export default function PricingPage() {
         t("pricing.allStyles"),
         t("pricing.hdDownloads"),
         t("pricing.prioritySupport"),
-        "Best value, $0.99 per credit",
+        t("pricing.bestValue"),
       ],
       cta: "Get Business",
       popular: false,
@@ -127,7 +130,7 @@ export default function PricingPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => {
             const price = plan.monthlyPrice;
-            const ratePerPhoto = (price / plan.photos).toFixed(2);
+            const ratePerCredit = (price / plan.credits).toFixed(2);
             return (
               <div key={plan.name} className={`relative flex flex-col h-full ${plan.popular ? "md:-translate-y-2 z-10" : ""}`}>
                 {plan.popular && (
@@ -154,20 +157,20 @@ export default function PricingPage() {
                 <div className="space-y-4">
                   <h3 className="text-2xl font-black text-primary tracking-tight">{plan.name}</h3>
                   <p className="text-sm text-slate-500 font-medium">
-                    {plan.name === "Base" ? "Perfect for trying out the platform." : plan.name === "Pro" ? "Best for professionals." : "For agencies & high-volume users."}
+                    {plan.description}
                   </p>
                   <div className="pt-4 pb-2">
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-4xl font-semibold text-primary tracking-tight">${price}</span>
                       <span className="text-sm text-slate-500 font-medium uppercase tracking-wider">{t("pricing.perMonth")}</span>
                     </div>
-                    <p className="text-xs text-slate-400 font-medium mt-2">${ratePerPhoto} per credit</p>
+                    <p className="text-xs text-slate-400 font-medium mt-2">${ratePerCredit} {t("pricing.perCredit")}</p>
                   </div>
                   
                   <div className={`rounded-2xl p-5 mt-6 border ${plan.popular ? 'bg-orange-50/50 border-orange-100' : 'bg-slate-50/80 border-slate-100'}`}>
                     <div className="flex justify-between items-center">
+                       <span className={`text-3xl font-black ${plan.popular ? 'text-accent' : 'text-slate-800'}`}>{plan.credits}</span>
                        <span className={`text-sm font-bold ${plan.popular ? 'text-orange-900/60' : 'text-slate-500'}`}>{t("pricing.photosMonth")}</span>
-                       <span className={`text-3xl font-black ${plan.popular ? 'text-accent' : 'text-slate-800'}`}>{plan.photos}</span>
                     </div>
                   </div>
                 </div>
@@ -194,7 +197,7 @@ export default function PricingPage() {
                       : "bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/10"
                   } ${loadingPlan === plan.name ? 'opacity-70 cursor-wait' : ''}`}
                 >
-                  {loadingPlan === plan.name ? "Processing..." : t("pricing.subscribe")}
+                  {loadingPlan === plan.name ? t("pricing.processing") : t("pricing.subscribe")}
                 </button>
               </div>
               </div>

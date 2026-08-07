@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -43,6 +44,7 @@ export default function BeforeAfterSlider({
   hideControls = false,
   children,
 }: BeforeAfterSliderProps) {
+  const { t } = useLanguage();
   const [progress, setProgress] = useState(0);
 
   const hasDropdowns = onRoomChange && onStyleChange && rooms && styles && selectedRoom && selectedStyle;
@@ -143,7 +145,7 @@ export default function BeforeAfterSlider({
 
       {/* Top-left: Staging status indicator badge */}
       <div className="absolute top-4 left-4 z-10 rounded-full bg-slate-900/60 backdrop-blur-md px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white select-none pointer-events-none transition-colors duration-300">
-        {showStaged ? "Staged" : "Empty"}
+        {showStaged ? t("slider.staged") : t("slider.empty")}
       </div>
 
       {!hideControls && (

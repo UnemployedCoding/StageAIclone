@@ -2,28 +2,31 @@
 
 import React from "react";
 import { Shield, Sparkles, Monitor, Cpu } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function WhitelabelPage() {
+  const { t } = useLanguage();
+
   const features = [
     {
       icon: <Monitor className="h-6 w-6 text-accent" />,
-      title: "Your Domain & Branding",
-      description: "Host virtual staging under your own subdomain (e.g., staging.yourbrand.com) with custom logos and brand colors.",
+      title: t("whitelabel.f1Title"),
+      description: t("whitelabel.f1Desc"),
     },
     {
       icon: <Shield className="h-6 w-6 text-accent" />,
-      title: "Fully White-Labeled",
-      description: "No mention of StageLumen anywhere. Completely branded client logins, dashboards, and downloads.",
+      title: t("whitelabel.f2Title"),
+      description: t("whitelabel.f2Desc"),
     },
     {
       icon: <Cpu className="h-6 w-6 text-accent" />,
-      title: "Custom AI Tuning",
-      description: "Incorporate your own custom design catalogs, pre-selected furniture modules, and staging templates.",
+      title: t("whitelabel.f3Title"),
+      description: t("whitelabel.f3Desc"),
     },
     {
       icon: <Sparkles className="h-6 w-6 text-accent" />,
-      title: "Flexible Reseller Pricing",
-      description: "Charge your customers whatever you want. Set up monthly subscription tiers or pay-per-credit pricing.",
+      title: t("whitelabel.f4Title"),
+      description: t("whitelabel.f4Desc"),
     },
   ];
 
@@ -34,17 +37,17 @@ export default function WhitelabelPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-primary tracking-tight">
-            White-Label Staging Software
+            {t("whitelabel.title")}
           </h1>
           <p className="text-slate-600 text-lg leading-relaxed">
-            Start your own AI virtual staging SaaS business today. Sell staging services to your clients under your own brand.
+            {t("whitelabel.subtitle")}
           </p>
           <div className="pt-4">
             <button
               onClick={() => alert("Whitelabel contact inquiry form (Mock)")}
               className="rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
             >
-              Request White-Label Demo
+              {t("whitelabel.cta")}
             </button>
           </div>
         </div>

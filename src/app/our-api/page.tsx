@@ -2,28 +2,31 @@
 
 import React from "react";
 import { Terminal, Shield, Zap, Code } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function ApiPage() {
+  const { t } = useLanguage();
+
   const apis = [
     {
       icon: <Terminal className="h-6 w-6 text-accent" />,
-      title: "Simple JSON API",
-      description: "Trigger virtual staging with a simple HTTP POST request. Connect raw storage uploads directly into our API workflow.",
+      title: t("api.f1Title"),
+      description: t("api.f1Desc"),
     },
     {
       icon: <Zap className="h-6 w-6 text-accent" />,
-      title: "Sub-15s Generation",
-      description: "Engineered for speed. Receive fully furnished staged room outputs via webhook notifications in under 45 seconds.",
+      title: t("api.f2Title"),
+      description: t("api.f2Desc"),
     },
     {
       icon: <Code className="h-6 w-6 text-accent" />,
-      title: "Comprehensive Styling Catalog",
-      description: "Programmatically specify room type categories and design style parameters (Modern, Scandinavian, etc.).",
+      title: t("api.f3Title"),
+      description: t("api.f3Desc"),
     },
     {
       icon: <Shield className="h-6 w-6 text-accent" />,
-      title: "Secure & Scalable",
-      description: "Robust architecture with OAuth key authentication, rate limits configuration, and high concurrency support.",
+      title: t("api.f4Title"),
+      description: t("api.f4Desc"),
     },
   ];
 
@@ -34,17 +37,17 @@ export default function ApiPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-primary tracking-tight">
-            Virtual Staging Developer API
+            {t("api.title")}
           </h1>
           <p className="text-slate-600 text-lg leading-relaxed">
-            Integrate virtual home staging directly into your real estate website, CRM, mobile app, or print workflow.
+            {t("api.subtitle")}
           </p>
           <div className="pt-4">
             <button
               onClick={() => alert("API developer registration form (Mock)")}
               className="rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
             >
-              Get Developer API Key
+              {t("api.cta")}
             </button>
           </div>
         </div>
@@ -66,7 +69,7 @@ export default function ApiPage() {
 
         {/* API Code Snippet example */}
         <div className="max-w-3xl mx-auto space-y-4">
-          <h3 className="text-xl font-bold text-primary text-center">Staging Request Example</h3>
+          <h3 className="text-xl font-bold text-primary text-center">{t("api.example")}</h3>
           <div className="rounded-2xl bg-slate-900 border border-slate-800 p-6 overflow-x-auto text-sm text-slate-300 font-mono shadow-xl">
             <pre>{`curl -X POST "https://api.stagelumen.com/v1/stage" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\

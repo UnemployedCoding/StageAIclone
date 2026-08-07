@@ -25,7 +25,7 @@ async function run() {
       status: "active",
       stripe_subscription_id: sub.id,
       stripe_customer_id: customer,
-      current_period_end: new Date(sub.current_period_end * 1000).toISOString(),
+      current_period_end: new Date((sub as any).current_period_end * 1000).toISOString(),
     });
     console.log("Upsert error:", subErr);
 

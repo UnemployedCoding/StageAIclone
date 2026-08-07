@@ -125,9 +125,9 @@ export default function GallerySection() {
             See the Transformation:{" "}
             <span className="font-normal">Before &amp; After Gallery</span>
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
+          <p className="text-slate-300 text-base sm:text-lg text-balance leading-relaxed">
             See how StageLumen transforms unappealing spaces into attractive,{" "}
-            <strong className="text-white font-bold">listing-ready homes in seconds.</strong>
+            <strong className="text-white font-bold inline-block">listing‑ready homes in seconds.</strong>
           </p>
         </div>
 

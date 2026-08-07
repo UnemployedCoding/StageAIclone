@@ -103,6 +103,25 @@ export default function Home() {
   const [selectedStyle, setSelectedStyle] = useState("original");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
+  const rooms = [
+    { id: "living-room", name: t("room.livingRoom") },
+    { id: "bedroom", name: t("room.bedroom") },
+    { id: "kitchen", name: t("room.kitchen") },
+    { id: "dining-room", name: t("room.diningRoom") },
+    { id: "home-office", name: t("room.homeOffice") },
+    { id: "outdoor", name: t("room.outdoor") },
+  ];
+
+  const styles = [
+    { id: "original", name: t("style.original") },
+    { id: "modern", name: t("style.modern") },
+    { id: "scandinavian", name: t("style.scandinavian") },
+    { id: "luxury", name: t("style.luxury") },
+    { id: "midcentury", name: t("style.midcentury") },
+    { id: "coastal", name: t("style.coastal") },
+    { id: "farmhouse", name: t("style.farmhouse") },
+  ];
+
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
   };
@@ -169,8 +188,8 @@ export default function Home() {
                 aspectRatio="aspect-[4/3] sm:aspect-video"
                 selectedRoom={selectedRoom}
                 selectedStyle={selectedStyle}
-                rooms={ROOM_TYPES}
-                styles={STYLES}
+                rooms={rooms}
+                styles={styles}
                 onRoomChange={setSelectedRoom}
                 onStyleChange={setSelectedStyle}
               />
@@ -191,7 +210,7 @@ export default function Home() {
               </div>
               <div className="space-y-1">
                 <p className="font-display text-3xl font-extrabold text-primary tracking-tight">
-                  Under 45s
+                  {t("stats.turnaroundVal")}
                 </p>
                 <p className="text-sm text-slate-500 font-medium">{t("stats.turnaround")}</p>
               </div>
@@ -204,7 +223,7 @@ export default function Home() {
               </div>
               <div className="space-y-1">
                 <p className="font-display text-3xl font-extrabold text-primary tracking-tight">
-                  <span className="text-accent">&lt;</span>$1 <span className="text-xl">/ img</span>
+                  {t("stats.costVal")}
                 </p>
                 <p className="text-sm text-slate-500 font-medium">{t("stats.cost")}</p>
               </div>

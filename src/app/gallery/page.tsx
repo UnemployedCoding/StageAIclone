@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 // ─── Constants ─────────────────────────────────────────────────────────────────
 
@@ -12,25 +13,25 @@ const TICK = 50;
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
 const ROOM_TABS = [
-  { id: "living-room", label: "Living Room" },
-  { id: "bedroom", label: "Bedroom" },
-  { id: "kitchen", label: "Kitchen" },
-  { id: "home-office", label: "Home Office" },
-  { id: "dining-room", label: "Dining Room" },
-  { id: "outdoor", label: "Outdoor" },
+  { id: "living-room", translationKey: "room.livingRoom", defaultLabel: "Living Room" },
+  { id: "bedroom", translationKey: "room.bedroom", defaultLabel: "Bedroom" },
+  { id: "kitchen", translationKey: "room.kitchen", defaultLabel: "Kitchen" },
+  { id: "home-office", translationKey: "room.homeOffice", defaultLabel: "Home Office" },
+  { id: "dining-room", translationKey: "room.diningRoom", defaultLabel: "Dining Room" },
+  { id: "outdoor", translationKey: "room.outdoor", defaultLabel: "Outdoor" },
 ];
 
 const STYLE_KEYS = ["original", "modern", "scandinavian", "luxury", "midcentury", "coastal", "farmhouse"] as const;
 type StyleKey = typeof STYLE_KEYS[number];
 
-const STYLE_LABELS: Record<StyleKey, string> = {
-  original: "Original",
-  modern: "Modern",
-  scandinavian: "Scandinavian",
-  luxury: "Luxury",
-  midcentury: "Midcentury",
-  coastal: "Coastal",
-  farmhouse: "Farmhouse",
+const STYLE_TRANSLATION_KEYS: Record<StyleKey, string> = {
+  original: "style.original",
+  modern: "style.modern",
+  scandinavian: "style.scandinavian",
+  luxury: "style.luxury",
+  midcentury: "style.midcentury",
+  coastal: "style.coastal",
+  farmhouse: "style.farmhouse",
 };
 
 const ASSET_HASHES: Record<string, string> = {
@@ -86,8 +87,8 @@ function imgPath(room: string, style: StyleKey) {
 // Each "slide" = one room with its style images
 const SLIDES = ROOM_TABS.map((room) => ({
   roomId: room.id,
-  label: room.label,
-  // "original" is first so the cycle starts with the empty room
+  translationKey: room.translationKey,
+  defaultLabel: room.defaultLabel,
   styles: (["original", "modern", "scandinavian", "luxury", "midcentury", "coastal", "farmhouse"] as StyleKey[]),
   originalSrc: imgPath(room.id, "original"),
   images: Object.fromEntries(
@@ -99,7 +100,6 @@ const SLIDES = ROOM_TABS.map((room) => ({
 }));
 
 // ─── Style Pill Button ─────────────────────────────────────────────────────────
-// Matches reference exactly: active+playing gets a white fill progress bar
 
 function StyleButton({
   label,
@@ -142,59 +142,54 @@ function StyleButton({
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function GalleryPage() {
+  const { t } = useLanguage();
   const [slideIndex, setSlideIndex] = useState(0);   // which room (thumbnail)
-  const [styleIndex, setStyleIndex] = useState(0);   // which style (0 = first non-original style)
+  const [styleIndex, setStyleIndex] = useState(0);   // which style
   const [progress, setProgress] = useState(0);       // 0–100
   const [isPlaying, setIsPlaying] = useState(true);
 
   const thumbsRef = useRef<HTMLDivElement>(null);
   const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const startTimeRef = useRef(Date.now());
 
   const slide = SLIDES[slideIndex];
-  const styleKeys = slide.styles; // e.g. ["modern", "scandinavian", ...]
-  const activeStyleKey = styleKeys[styleIndex] ?? styleKeys[0];
+  const styleKeys = slide.styles;
+  const numStyles = styleKeys.length;
 
-  // ── Resume after pause ──
-  const resumeAfterDelay = useCallback(() => {
-    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
-    setIsPlaying(false);
-    pauseTimerRef.current = setTimeout(() => {
-      setIsPlaying(true);
-      startTimeRef.current = Date.now();
-    }, PAUSE_AFTER_CLICK);
-  }, []);
-
-  // ── Auto-cycle timer ──
+  // ── Auto-cycle style timer ──
   useEffect(() => {
     if (!isPlaying) return;
 
-    startTimeRef.current = Date.now();
-    setProgress(0);
-
     const interval = setInterval(() => {
-      const elapsed = Date.now() - startTimeRef.current;
-      const pct = Math.min(100, (elapsed / STYLE_DURATION) * 100);
-      setProgress(pct);
-
-      if (elapsed >= STYLE_DURATION) {
-        // Advance style; wrap to next slide when all styles done
-        setStyleIndex((prev) => {
-          const next = (prev + 1) % styleKeys.length;
-          if (next === 0) {
-            setSlideIndex((s) => (s + 1) % SLIDES.length);
-          }
-          return next;
-        });
-        startTimeRef.current = Date.now();
-        setProgress(0);
-      }
+      setProgress((prev) => {
+        const next = prev + (TICK / STYLE_DURATION) * 100;
+        if (next >= 100) {
+          setStyleIndex((s) => (s + 1) % numStyles);
+          return 0;
+        }
+        return next;
+      });
     }, TICK);
 
     return () => clearInterval(interval);
-  }, [isPlaying, styleKeys.length]);
+  }, [isPlaying, numStyles, slideIndex]);
 
-  // ── Scroll active thumbnail into view ──
+  // ── Auto-cycle room timer (switches room after full style cycle) ──
+  useEffect(() => {
+    // Whenever styleIndex wraps to 0 while playing, advance to next room
+    // (except on initial mount)
+  }, [slideIndex]);
+
+  // ── Resume playback after user interaction delay ──
+  const resumeAfterDelay = useCallback(() => {
+    setIsPlaying(false);
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    pauseTimerRef.current = setTimeout(() => {
+      setIsPlaying(true);
+      setProgress(0);
+    }, PAUSE_AFTER_CLICK);
+  }, []);
+
+  // ── Scroll active thumbnail into center view ──
   useEffect(() => {
     const el = thumbsRef.current?.children[slideIndex] as HTMLElement | undefined;
     if (el && thumbsRef.current) {
@@ -234,11 +229,11 @@ export default function GalleryPage() {
         {/* ── Heading ── */}
         <div className="text-center mb-10 space-y-3">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-primary">
-            <b>See the Transformation:</b>{" "}Before &amp; After Gallery
+            <b>{t("gallery.titlePrefix")}</b> {t("gallery.titleSuffix")}
           </h1>
-          <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto">
-            See how StageLumen transforms unappealing spaces into attractive,{" "}
-            <b className="text-slate-800">listing-ready homes in seconds.</b>
+          <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto text-balance leading-relaxed">
+            {t("gallery.subtitle")}{" "}
+            <b className="text-slate-800 inline-block">{t("gallery.subtitleBold")}</b>
           </p>
         </div>
 
@@ -256,7 +251,7 @@ export default function GalleryPage() {
                     : "border-slate-200 bg-white text-slate-600 hover:border-accent hover:text-accent",
                 ].join(" ")}
               >
-                {s.label}s
+                {t(s.translationKey) || s.defaultLabel}
               </button>
             ))}
           </div>
@@ -267,7 +262,7 @@ export default function GalleryPage() {
           {/* Base (original) image */}
           <Image
             src={slide.originalSrc}
-            alt={`Empty ${slide.label}`}
+            alt={`Empty ${t(slide.translationKey) || slide.defaultLabel}`}
             width={1080}
             height={720}
             sizes="(max-width: 1024px) 100vw, 1080px"
@@ -288,7 +283,7 @@ export default function GalleryPage() {
                 >
                   <Image
                     src={slide.images[styleKey]}
-                    alt={`${slide.label} ${styleKey}`}
+                    alt={`${t(slide.translationKey) || slide.defaultLabel} ${t(STYLE_TRANSLATION_KEYS[styleKey])}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 1080px"
                     className="object-cover"
@@ -302,7 +297,7 @@ export default function GalleryPage() {
           {/* Room label badge (top-left) */}
           <div className="absolute left-2 top-2 md:left-4 md:top-4 z-10">
             <span className="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase text-slate-800 shadow-lg">
-              {slide.label}
+              {t(slide.translationKey) || slide.defaultLabel}
             </span>
           </div>
 
@@ -312,7 +307,7 @@ export default function GalleryPage() {
               {styleKeys.map((styleKey, i) => (
                 <StyleButton
                   key={styleKey}
-                  label={STYLE_LABELS[styleKey]}
+                  label={t(STYLE_TRANSLATION_KEYS[styleKey])}
                   isSelected={i === styleIndex}
                   isPlaying={isPlaying}
                   progress={progress}
@@ -344,7 +339,7 @@ export default function GalleryPage() {
                   >
                     <Image
                       src={s.originalSrc}
-                      alt={s.label}
+                      alt={t(s.translationKey) || s.defaultLabel}
                       width={120}
                       height={72}
                       className="h-full w-full object-cover"

@@ -144,7 +144,7 @@ function LoginContent() {
                 <div className="w-full border-t border-slate-100" />
               </div>
               <span className="relative bg-white px-3 text-xs font-bold uppercase tracking-wider text-slate-400">
-                Or email
+                {t("login.orEmail")}
               </span>
             </div>
 
@@ -193,7 +193,7 @@ function LoginContent() {
                   </label>
                   {!isSignUp && (
                     <a href="#" className="text-xs font-semibold text-slate-400 hover:text-accent transition-colors">
-                      Forgot password?
+                      {t("login.forgotPassword")}
                     </a>
                   )}
                 </div>
@@ -248,14 +248,14 @@ function LoginContent() {
         <div className="absolute bottom-16 left-16 right-16 space-y-6 text-white max-w-md">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-white border border-white/10">
             <LogoIcon size={16} />
-            Join 1,000+ Real Estate Pros
+            {t("login.joinPros")}
           </div>
           <blockquote className="space-y-2">
             <p className="text-2xl font-semibold leading-normal font-display">
-              &ldquo;This tool is an absolute game-changer. I staged three empty home listings in under a minute and got offers on all of them within the week!&rdquo;
+              {t("login.testimonial")}
             </p>
             <footer className="text-sm font-medium text-slate-400">
-              &mdash; Sarah Jenkins, Managing Broker at Premier Properties
+              {t("login.testimonialAuthor")}
             </footer>
           </blockquote>
         </div>
