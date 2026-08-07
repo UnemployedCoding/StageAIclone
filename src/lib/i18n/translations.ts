@@ -16,7 +16,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Hero
     "hero.badge": "AI Built for Real Estate",
-    "hero.australian": "🇦🇺 Built & Operated in Australia",
+    "hero.australian": "🇦🇺 Built and operated in Australia",
     "hero.title": "Real Estate Photo Transformation",
     "hero.titleHighlight": "in seconds",
     "hero.stat1": "Empty listings get",
