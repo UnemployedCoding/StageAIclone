@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Check, HelpCircle, ChevronDown, Flame, Sparkles } from "lucide-react";
+import { Check, HelpCircle, ChevronDown, Flame, Sparkles, Eye, ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -115,13 +115,13 @@ function PricingContent() {
   ];
 
   return (
-    <div className="bg-slate-50 py-20 min-h-screen">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="bg-slate-50 py-16 sm:py-20 min-h-screen">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Notice if redirected from dashboard */}
         {hasNoPlanNotice && (
-          <div className="max-w-2xl mx-auto -mb-6 p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-center flex items-center justify-center gap-2.5 text-accent font-semibold text-sm animate-fade-in shadow-sm">
-            <Sparkles className="h-4 w-4 shrink-0" />
+          <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-orange-50 border border-orange-200 text-center flex items-center justify-center gap-2.5 text-accent font-semibold text-sm animate-fade-in shadow-sm">
+            <Sparkles className="h-4 w-4 shrink-0 text-accent" />
             <span>{t("pricing.noPlanNotice")}</span>
           </div>
         )}
@@ -134,6 +134,18 @@ function PricingContent() {
           <p className="text-slate-600 text-lg leading-relaxed">
             {t("pricing.subtitle")}
           </p>
+
+          {/* See demo button */}
+          <div className="pt-2 flex items-center justify-center">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-slate-200 text-slate-800 font-bold hover:border-accent hover:text-accent shadow-sm hover:shadow-md transition-all group cursor-pointer"
+            >
+              <Eye className="h-4 w-4 text-accent transition-transform group-hover:scale-110" />
+              <span>{t("pricing.seeDemo")}</span>
+              <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-accent transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
 
         {/* Pricing Cards Grid */}

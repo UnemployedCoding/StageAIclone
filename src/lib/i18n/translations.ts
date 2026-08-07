@@ -144,6 +144,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Pricing Page
     "pricing.noPlanNotice": "Please choose a subscription plan below to access your staging dashboard.",
+    "pricing.seeDemo": "See live staging demo & gallery",
     "pricing.title": "Simple, Transparent Pricing",
     "pricing.subtitle": "Choose the plan that fits your staging needs. No hidden fees, cancel anytime.",
     "pricing.popular": "Most Popular",
@@ -431,6 +432,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Pricing Page
     "pricing.noPlanNotice": "Veuillez choisir un abonnement ci-dessous pour accéder à votre tableau de bord.",
+    "pricing.seeDemo": "Voir des exemples avant / après",
     "pricing.title": "Des forfaits simples et transparents",
     "pricing.subtitle": "Choisissez la formule adaptée à votre volume d'annonces. Sans frais cachés, sans engagement.",
     "pricing.popular": "Le plus populaire",
