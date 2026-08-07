@@ -91,7 +91,7 @@ export default function DashboardPage() {
       if (data) setCredits(data.credits_remaining);
     };
     loadProfile();
-  }, [supabase]);
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
