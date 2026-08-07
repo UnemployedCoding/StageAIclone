@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Check, HelpCircle, ChevronDown, Flame } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Check, HelpCircle, ChevronDown, Flame, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-export default function PricingPage() {
+function PricingContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const hasNoPlanNotice = searchParams.get("no_plan") === "true";
   const supabase = createClient();
   const { t } = useLanguage();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
@@ -116,6 +118,14 @@ export default function PricingPage() {
     <div className="bg-slate-50 py-20 min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
         
+        {/* Notice if redirected from dashboard */}
+        {hasNoPlanNotice && (
+          <div className="max-w-2xl mx-auto -mb-6 p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-center flex items-center justify-center gap-2.5 text-accent font-semibold text-sm animate-fade-in shadow-sm">
+            <Sparkles className="h-4 w-4 shrink-0" />
+            <span>{t("pricing.noPlanNotice")}</span>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-primary tracking-tight">
@@ -243,5 +253,13 @@ export default function PricingPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function PricingPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50" />}>
+      <PricingContent />
+    </Suspense>
   );
 }

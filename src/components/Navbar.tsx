@@ -29,8 +29,12 @@ export default function Navbar() {
   const { locale, setLocale, t } = useLanguage();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const fetchUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user ?? null);
+    };
+    fetchUser();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: unknown, session: { user?: { email?: string } | null } | null) => {
       setUser(session?.user ?? null);
     });
     return () => subscription.unsubscribe();

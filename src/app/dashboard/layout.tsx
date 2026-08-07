@@ -12,17 +12,17 @@ export default async function DashboardLayout({
   // Redirect to login if not authenticated
   if (!user) redirect("/login");
 
-  // Temporarily commented out subscription check to allow testing/image editing
-  /*
+  // Enforce strict paywall: require an active subscription to access dashboard
   const { data: subscription } = await supabase
     .from("subscriptions")
-    .select("*")
+    .select("id, status")
     .eq("user_id", user.id)
     .eq("status", "active")
-    .single();
+    .maybeSingle();
 
-  if (!subscription) redirect("/prices?no_plan=true");
-  */
+  if (!subscription) {
+    redirect("/prices?no_plan=true");
+  }
 
   return <>{children}</>;
 }
