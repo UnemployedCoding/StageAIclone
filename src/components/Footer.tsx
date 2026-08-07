@@ -34,11 +34,10 @@ export default function Footer() {
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
               {t("footer.desc")}
             </p>
-
           </div>
 
           {/* Column 2: Product links */}
-          <div className="col-span-2 space-y-3">
+          <div className="col-span-1 md:col-span-2 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("footer.product")}</h4>
             <ul className="space-y-2 text-sm font-medium">
               <li>
@@ -57,7 +56,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Business links */}
-          <div className="col-span-2 space-y-3">
+          <div className="col-span-1 md:col-span-3 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("footer.business")}</h4>
             <ul className="space-y-2 text-sm font-medium">
               <li>
@@ -66,17 +65,11 @@ export default function Footer() {
               <li>
                 <Link href="/whitelabel" className="hover:text-white transition-colors">{t("footer.whiteLabel")}</Link>
               </li>
-              <li>
-                <Link href="/our-api" className="hover:text-white transition-colors">{t("footer.apiAccess")}</Link>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">{t("footer.careers")}</a>
-              </li>
             </ul>
           </div>
 
           {/* Column 4: Newsletter */}
-          <div className="md:col-span-4 space-y-3">
+          <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">{t("footer.stayUpdated")}</h4>
             <p className="text-sm text-slate-400 leading-relaxed">
               {t("footer.newsletter")}
