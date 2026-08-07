@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Check, HelpCircle, ChevronDown, Flame } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function PricingPage() {
   const router = useRouter();
   const supabase = createClient();
+  const { t } = useLanguage();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -45,12 +47,12 @@ export default function PricingPage() {
       photos: 15,
       monthlyPrice: 39,
       features: [
-        "15 credits per month",
-        "Credits reset monthly",
-        "No rollover",
-        "All design styles",
-        "High-res PNG downloads",
-        "Email support",
+        "15 " + t("pricing.creditsPerMonth"),
+        t("pricing.creditsReset"),
+        t("pricing.noRollover"),
+        t("pricing.allStyles"),
+        t("pricing.hdDownloads"),
+        t("pricing.emailSupport"),
       ],
       cta: "Get Base",
       popular: false,
@@ -60,11 +62,11 @@ export default function PricingPage() {
       photos: 45,
       monthlyPrice: 49,
       features: [
-        "45 credits per month",
-        "Unused credits roll over for 60 days",
-        "All design styles",
-        "High-res PNG downloads",
-        "Priority support",
+        "45 " + t("pricing.creditsPerMonth"),
+        t("pricing.rollover60"),
+        t("pricing.allStyles"),
+        t("pricing.hdDownloads"),
+        t("pricing.prioritySupport"),
       ],
       cta: "Get Pro",
       popular: true,
@@ -74,11 +76,11 @@ export default function PricingPage() {
       photos: 150,
       monthlyPrice: 149,
       features: [
-        "150 credits per month",
-        "Unused credits roll over for 60 days",
-        "All design styles",
-        "High-res PNG downloads",
-        "Priority support",
+        "150 " + t("pricing.creditsPerMonth"),
+        t("pricing.rollover60"),
+        t("pricing.allStyles"),
+        t("pricing.hdDownloads"),
+        t("pricing.prioritySupport"),
         "Best value, $0.99 per credit",
       ],
       cta: "Get Business",
@@ -90,20 +92,20 @@ export default function PricingPage() {
 
   const pricingFaqs = [
     {
-      q: "Can I upgrade or downgrade my plan at any time?",
-      a: "Yes! You can easily upgrade, downgrade, or cancel your subscription at any time from your billing dashboard. Remaining credits will be adjusted accordingly.",
+      q: t("pricing.faq.q1"),
+      a: t("pricing.faq.a1"),
     },
     {
-      q: "Do staging credits roll over to the next month?",
-      a: "Staging credits reset at the end of each billing cycle to ensure our servers maintain peak performance for all active users.",
+      q: t("pricing.faq.q2"),
+      a: t("pricing.faq.a2"),
     },
     {
-      q: "Is payment secure?",
-      a: "Absolutely. We use Stripe to handle all subscription management and billing. Your credit card information is never stored on our servers.",
+      q: t("pricing.faq.q3"),
+      a: t("pricing.faq.a3"),
     },
     {
-      q: "What is your refund policy?",
-      a: "If you are not satisfied with your purchase, contact our support team within 14 days of subscribing, and we will issue a full refund if you have used less than 3 staging credits.",
+      q: t("pricing.faq.q4"),
+      a: t("pricing.faq.a4"),
     },
   ];
 
@@ -114,10 +116,10 @@ export default function PricingPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-primary tracking-tight">
-            Simple, Transparent Pricing
+            {t("pricing.title")}
           </h1>
           <p className="text-slate-600 text-lg leading-relaxed">
-            Stage all your listings for a fraction of the cost of physical staging. Cancel or change plans at any time.
+            {t("pricing.subtitle")}
           </p>
         </div>
 
@@ -144,7 +146,7 @@ export default function PricingPage() {
                   <div className="absolute -top-4 left-0 right-0 flex justify-center">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 px-4 py-1.5 text-[11px] font-black text-white uppercase tracking-widest shadow-sm">
                       <Flame className="h-3.5 w-3.5 fill-current" />
-                      Most Popular
+                      {t("pricing.popular")}
                     </span>
                   </div>
                 )}
@@ -157,14 +159,14 @@ export default function PricingPage() {
                   <div className="pt-4 pb-2">
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-4xl font-semibold text-primary tracking-tight">${price}</span>
-                      <span className="text-sm text-slate-500 font-medium uppercase tracking-wider">/month</span>
+                      <span className="text-sm text-slate-500 font-medium uppercase tracking-wider">{t("pricing.perMonth")}</span>
                     </div>
                     <p className="text-xs text-slate-400 font-medium mt-2">${ratePerPhoto} per credit</p>
                   </div>
                   
                   <div className={`rounded-2xl p-5 mt-6 border ${plan.popular ? 'bg-orange-50/50 border-orange-100' : 'bg-slate-50/80 border-slate-100'}`}>
                     <div className="flex justify-between items-center">
-                       <span className={`text-sm font-bold ${plan.popular ? 'text-orange-900/60' : 'text-slate-500'}`}>Monthly credits</span>
+                       <span className={`text-sm font-bold ${plan.popular ? 'text-orange-900/60' : 'text-slate-500'}`}>{t("pricing.photosMonth")}</span>
                        <span className={`text-3xl font-black ${plan.popular ? 'text-accent' : 'text-slate-800'}`}>{plan.photos}</span>
                     </div>
                   </div>
@@ -192,7 +194,7 @@ export default function PricingPage() {
                       : "bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/10"
                   } ${loadingPlan === plan.name ? 'opacity-70 cursor-wait' : ''}`}
                 >
-                  {loadingPlan === plan.name ? "Processing..." : plan.cta}
+                  {loadingPlan === plan.name ? "Processing..." : t("pricing.subscribe")}
                 </button>
               </div>
               </div>
@@ -203,7 +205,7 @@ export default function PricingPage() {
         {/* Pricing FAQs Accordion */}
         <div className="max-w-3xl mx-auto pt-16 border-t border-slate-200 space-y-8">
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-center text-primary tracking-tight">
-            Pricing FAQ
+            {t("pricing.faqTitle")}
           </h2>
           <div className="space-y-4">
             {pricingFaqs.map((faq, index) => {

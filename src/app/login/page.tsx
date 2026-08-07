@@ -4,14 +4,16 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Lock, Eye, EyeOff, ArrowLeft, User } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, User, Mail, Lock } from "lucide-react";
 import LogoIcon from "@/components/LogoIcon";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 function LoginContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const supabase = createClient();
+  const { t } = useLanguage();
 
   const isSignUpParam = searchParams.get("signUp") === "true";
   const selectedPlan = searchParams.get("plan") || "";
@@ -48,7 +50,7 @@ function LoginContent() {
       if (error) {
         setError(error.message);
       } else {
-        setMessage("Check your email to confirm your account, then sign in.");
+        setMessage(t("login.checkEmail"));
       }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -84,21 +86,21 @@ function LoginContent() {
             className="inline-flex items-center gap-1 text-sm font-semibold text-slate-500 hover:text-primary transition-colors cursor-pointer group"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to Home
+            {t("login.backToHome")}
           </button>
 
           {/* Heading */}
           <div className="space-y-2">
             <h2 className="font-display text-3xl font-extrabold text-primary tracking-tight">
-              {isSignUp ? "Create your account" : "Welcome back"}
+              {isSignUp ? t("login.createAccount") : t("login.welcomeBack")}
             </h2>
             <p className="text-sm text-slate-500 font-medium">
-              {isSignUp ? "Already have an account?" : "New to StageLumen?"}{" "}
+              {isSignUp ? t("login.alreadyHaveAccount") : t("login.newToStageLumen")}{" "}
               <button
                 onClick={() => { setIsSignUp(!isSignUp); setError(""); setMessage(""); }}
                 className="font-bold text-accent hover:text-accent-hover transition-colors"
               >
-                {isSignUp ? "Sign In" : "Create Account"}
+                {isSignUp ? t("login.signIn") : t("login.signUp")}
               </button>
             </p>
           </div>
@@ -133,7 +135,7 @@ function LoginContent() {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
               </svg>
-              Continue with Google
+              {t("login.continueWith")} {t("login.google")}
             </button>
 
             {/* Divider */}
@@ -151,14 +153,14 @@ function LoginContent() {
               {isSignUp && (
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">
-                    Full Name
+                    {t("login.fullName")}
                   </label>
                   <div className="relative">
                     <User className="absolute left-4 top-3.5 h-4 w-4 text-slate-400" />
                     <input
                       type="text"
                       required
-                      placeholder="John Doe"
+                      placeholder={t("login.namePlaceholder")}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full rounded-xl border border-slate-200 pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-accent transition-colors"
@@ -169,14 +171,14 @@ function LoginContent() {
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">
-                  Email Address
+                  {t("login.email")}
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-3.5 h-4 w-4 text-slate-400" />
                   <input
                     type="email"
                     required
-                    placeholder="john@example.com"
+                    placeholder={t("login.emailPlaceholder")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full rounded-xl border border-slate-200 pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-accent transition-colors"
@@ -187,7 +189,7 @@ function LoginContent() {
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">
-                    Password
+                    {t("login.password")}
                   </label>
                   {!isSignUp && (
                     <a href="#" className="text-xs font-semibold text-slate-400 hover:text-accent transition-colors">
@@ -200,7 +202,7 @@ function LoginContent() {
                   <input
                     type={showPassword ? "text" : "password"}
                     required
-                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                    placeholder={t("login.passwordPlaceholder")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full rounded-xl border border-slate-200 pl-11 pr-11 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-accent transition-colors"
@@ -225,7 +227,7 @@ function LoginContent() {
                 {isLoading ? (
                   <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 ) : (
-                  <span>{isSignUp ? "Create Account" : "Sign In"}</span>
+                  <span>{isSignUp ? t("login.signUp") : t("login.signIn")}</span>
                 )}
               </button>
             </form>

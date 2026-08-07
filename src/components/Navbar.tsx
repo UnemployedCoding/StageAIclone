@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, LayoutDashboard } from "lucide-react";
 import LogoIcon from "@/components/LogoIcon";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,6 +14,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<{ email?: string } | null>(null);
   const supabase = createClient();
+  const { locale, setLocale, t } = useLanguage();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
@@ -29,10 +31,10 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Pricing", href: "/prices" },
-    { name: "FAQ", href: "/#faq" },
+    { name: t("nav.home"), href: "/" },
+    { name: t("nav.gallery"), href: "/gallery" },
+    { name: t("nav.pricing"), href: "/prices" },
+    { name: t("nav.faq"), href: "/#faq" },
   ];
 
   return (
@@ -69,6 +71,13 @@ export default function Navbar() {
 
           {/* Desktop CTA actions */}
           <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={() => setLocale(locale === "en" ? "fr" : "en")}
+              className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all"
+              aria-label="Switch language"
+            >
+              {locale === "en" ? "🇫🇷 FR" : "🇬🇧 EN"}
+            </button>
             {user ? (
               <>
                 <Link
@@ -76,13 +85,13 @@ export default function Navbar() {
                   className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-accent px-3 py-2 transition-colors"
                 >
                   <LayoutDashboard className="h-4 w-4" />
-                  Dashboard
+                  {t("nav.dashboard")}
                 </Link>
                 <button
                   onClick={handleSignOut}
                   className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-sm font-semibold px-5 py-2.5 transition-all"
                 >
-                  Sign Out
+                  {t("nav.signOut")}
                 </button>
               </>
             ) : (
@@ -91,13 +100,13 @@ export default function Navbar() {
                   href="/login"
                   className="text-sm font-medium text-slate-700 hover:text-accent px-3 py-2 transition-colors"
                 >
-                  Sign In
+                  {t("nav.signIn")}
                 </Link>
                 <Link
                   href="/login?signUp=true"
                   className="rounded-full bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-5 py-2.5 shadow-lg shadow-orange-500/15 transition-all hover:shadow-orange-500/25 active:scale-[0.98]"
                 >
-                  Get Started
+                  {t("nav.getStarted")}
                 </Link>
               </>
             )}
@@ -138,19 +147,26 @@ export default function Navbar() {
             })}
           </div>
           <div className="border-t border-slate-100 pt-4 flex flex-col gap-3">
+            <button
+              onClick={() => setLocale(locale === "en" ? "fr" : "en")}
+              className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all"
+              aria-label="Switch language"
+            >
+              {locale === "en" ? "🇫🇷 FR" : "🇬🇧 EN"}
+            </button>
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
               className="flex justify-center rounded-lg border border-slate-200 py-2.5 text-base font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
             >
-              Sign In
+              {t("nav.signIn")}
             </Link>
             <Link
               href="/login?signUp=true"
               onClick={() => setMobileMenuOpen(false)}
               className="flex justify-center rounded-lg bg-accent py-2.5 text-base font-semibold text-white shadow-md hover:bg-accent-hover transition-colors"
             >
-              Get Started
+              {t("nav.getStarted")}
             </Link>
           </div>
         </div>
