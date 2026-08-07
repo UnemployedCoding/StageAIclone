@@ -56,26 +56,26 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
+        <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
           
           {/* Left Group: Logo + Desktop Links (grouped together so they never overlap) */}
-          <div className="flex items-center gap-8 xl:gap-10 shrink-0">
-            <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <LogoIcon size={32} />
-              <span className="font-display text-xl font-bold tracking-tight text-primary whitespace-nowrap">
+          <div className="flex items-center gap-4 lg:gap-8 xl:gap-10 shrink-0">
+            <Link href="/" className="flex items-center gap-2 shrink-0">
+              <LogoIcon size={30} />
+              <span className="font-display text-lg sm:text-xl font-bold tracking-tight text-primary whitespace-nowrap">
                 Stage<span className="text-accent">Lumen</span>
               </span>
             </Link>
 
-            {/* Desktop Navigation links (xl+) */}
-            <nav className="hidden xl:flex items-center gap-6 xl:gap-8 shrink-0">
+            {/* Desktop Navigation links (visible on md screens and up) */}
+            <nav className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8 shrink-0">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
+                    className={`text-xs lg:text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
                       isActive ? "text-accent font-semibold" : "text-slate-600"
                     }`}
                   >
@@ -86,12 +86,13 @@ export default function Navbar() {
             </nav>
           </div>
 
-          {/* Desktop Right CTA actions (xl+) */}
-          <div className="hidden xl:flex items-center gap-3 xl:gap-4 shrink-0">
+          {/* Desktop Right CTA actions (visible on md screens and up) */}
+          <div className="hidden md:flex items-center gap-2 lg:gap-3 xl:gap-4 shrink-0">
+            {/* Language Switcher */}
             <div className="relative shrink-0" ref={langMenuRef}>
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all whitespace-nowrap cursor-pointer"
+                className="flex items-center gap-1 lg:gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 lg:px-3 lg:py-1.5 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all whitespace-nowrap cursor-pointer"
                 aria-label="Switch language"
               >
                 {locale === "en" ? "🇬🇧 EN" : "🇫🇷 FR"}
@@ -118,40 +119,46 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+
             {user ? (
               <>
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-accent px-3 py-2 transition-colors whitespace-nowrap shrink-0"
+                  className="flex items-center gap-1.5 text-xs lg:text-sm font-medium text-slate-700 hover:text-accent px-2 lg:px-3 py-2 transition-colors whitespace-nowrap shrink-0"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   {t("nav.dashboard")}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-sm font-semibold px-4.5 py-2 transition-all whitespace-nowrap shrink-0 cursor-pointer"
+                  className="rounded-full border border-slate-200 text-slate-600 hover:text-red-500 hover:border-red-200 text-xs lg:text-sm font-semibold px-3.5 py-1.5 lg:px-4.5 lg:py-2 transition-all whitespace-nowrap shrink-0 cursor-pointer"
                 >
                   {t("nav.signOut")}
                 </button>
               </>
             ) : (
               <>
+                {/* See Demo CTA */}
                 <Link
                   href="/gallery"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
+                  className="inline-flex items-center gap-1 lg:gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-xs lg:text-sm font-bold px-2.5 py-1.5 lg:px-3.5 lg:py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
                 >
-                  <Sparkles className="h-3.5 w-3.5 fill-current animate-pulse text-accent" />
+                  <Sparkles className="h-3 w-3 lg:h-3.5 lg:w-3.5 fill-current animate-pulse text-accent" />
                   <span>{t("nav.seeDemo")}</span>
                 </Link>
+
+                {/* Sign In Link */}
                 <Link
                   href="/login"
-                  className="text-sm font-semibold text-slate-700 hover:text-accent px-3 py-2 transition-colors whitespace-nowrap shrink-0"
+                  className="text-xs lg:text-sm font-semibold text-slate-700 hover:text-accent px-1.5 lg:px-3 py-2 transition-colors whitespace-nowrap shrink-0"
                 >
                   {t("nav.signIn")}
                 </Link>
+
+                {/* Subscribe Button */}
                 <Link
                   href="/prices"
-                  className="rounded-full bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-4.5 py-2 shadow-lg shadow-orange-500/15 transition-all hover:shadow-orange-500/25 active:scale-[0.98] whitespace-nowrap shrink-0"
+                  className="rounded-full bg-accent hover:bg-accent-hover text-white text-xs lg:text-sm font-semibold px-3 py-1.5 lg:px-4.5 lg:py-2 shadow-md shadow-orange-500/15 transition-all hover:shadow-orange-500/25 active:scale-[0.98] whitespace-nowrap shrink-0"
                 >
                   {t("nav.subscribe")}
                 </Link>
@@ -159,11 +166,11 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Compact Tablet/Mobile Controls (< xl) */}
-          <div className="flex xl:hidden items-center gap-2.5 shrink-0">
+          {/* Mobile menu trigger (< md) */}
+          <div className="flex md:hidden items-center gap-2 shrink-0">
             <button
               onClick={() => { setLocale(locale === "en" ? "fr" : "en"); }}
-              className="flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all cursor-pointer"
+              className="flex items-center gap-1 rounded-full border border-slate-200 px-2 py-1 text-xs font-bold text-slate-600 hover:border-accent hover:text-accent transition-all cursor-pointer"
               title="Toggle Language"
             >
               {locale === "en" ? "🇬🇧 EN" : "🇫🇷 FR"}
@@ -172,7 +179,7 @@ export default function Navbar() {
             {!user && (
               <Link
                 href="/prices"
-                className="rounded-full bg-accent hover:bg-accent-hover text-white text-xs font-bold px-3.5 py-1.5 shadow-sm transition-all whitespace-nowrap"
+                className="rounded-full bg-accent hover:bg-accent-hover text-white text-xs font-bold px-3 py-1.5 shadow-sm transition-all whitespace-nowrap"
               >
                 {t("nav.subscribe")}
               </Link>
@@ -189,9 +196,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile / Tablet Menu Drawer (< xl) */}
+      {/* Mobile Menu Drawer (< md) */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-4 shadow-xl">
+        <div className="md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-4 shadow-xl">
           <div className="space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
