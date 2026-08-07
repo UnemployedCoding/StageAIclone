@@ -38,13 +38,19 @@ export async function POST(request: Request) {
     });
   }
 
+  const origin =
+    request.headers.get("origin") ||
+    (request.headers.get("referer") ? new URL(request.headers.get("referer")!).origin : null) ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    "http://localhost:3000";
+
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     payment_method_types: ["card"],
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/prices?canceled=true`,
+    success_url: `${origin}/dashboard?success=true`,
+    cancel_url: `${origin}/prices?canceled=true`,
     metadata: { supabase_user_id: user.id, plan, billing },
   });
 

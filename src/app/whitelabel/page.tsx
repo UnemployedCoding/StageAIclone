@@ -43,12 +43,12 @@ export default function WhitelabelPage() {
             {t("whitelabel.subtitle")}
           </p>
           <div className="pt-4">
-            <button
-              onClick={() => alert("Whitelabel contact inquiry form (Mock)")}
-              className="rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
+            <a
+              href="mailto:contact@stagelumen.com?subject=StageLumen%20White%20Label%20Inquiry"
+              className="inline-block rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
             >
               {t("whitelabel.cta")}
-            </button>
+            </a>
           </div>
         </div>
 

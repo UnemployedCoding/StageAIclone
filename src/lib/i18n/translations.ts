@@ -14,6 +14,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Hero
     "hero.badge": "AI Built for Real Estate",
+    "hero.australian": "🇦🇺 100% Australian Owned & Operated",
     "hero.title": "Real Estate Photo Transformation",
     "hero.titleHighlight": "in seconds",
     "hero.stat1": "Empty listings get",
@@ -268,6 +269,23 @@ const translations: Record<Locale, Record<string, string>> = {
     "api.f3Desc": "Programmatically specify room type categories and design style parameters (Modern, Scandinavian, etc.).",
     "api.f4Title": "Secure & Scalable",
     "api.f4Desc": "Robust architecture with OAuth key authentication, rate limits configuration, and high concurrency support.",
+
+    // Affiliate
+    "affiliate.title": "Join the StageLumen Affiliate Program",
+    "affiliate.subtitle": "Recommend the world's leading virtual staging AI platform and earn 30% recurring lifetime commissions.",
+    "affiliate.cta": "Become an Affiliate Partner",
+    "affiliate.b1Title": "30% Lifetime Commission",
+    "affiliate.b1Desc": "Earn 30% recurring commission on every payment made by customers you refer, forever.",
+    "affiliate.b2Title": "Monthly Payouts",
+    "affiliate.b2Desc": "Get paid automatically every month directly to your PayPal or bank account with no hassle.",
+    "affiliate.b3Title": "Marketing Materials",
+    "affiliate.b3Desc": "Access high-converting banner ads, email templates, and promotional copy to boost sales.",
+    "affiliate.b4Title": "Dedicated Support",
+    "affiliate.b4Desc": "Work with a dedicated affiliate manager to optimize your campaigns and maximize earnings.",
+    "affiliate.howTitle": "How it works",
+    "affiliate.s1": "1. Sign Up: Join our affiliate program in under 2 minutes through our partner portal.",
+    "affiliate.s2": "2. Promote: Share your unique affiliate link on your blog, social media networks, or directly with real estate agents.",
+    "affiliate.s3": "3. Earn: Earn a 30% recurring monthly commission on every subscription created through your link.",
   },
   fr: {
     // Navbar
@@ -282,6 +300,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Hero
     "hero.badge": "L'IA dédiée aux professionnels de l'immobilier",
+    "hero.australian": "🇦🇺 Entreprise 100% australienne",
     "hero.title": "Home Staging Virtuel par IA",
     "hero.titleHighlight": "en quelques secondes",
     "hero.stat1": "Les annonces non meublées reçoivent",
@@ -536,6 +555,23 @@ const translations: Record<Locale, Record<string, string>> = {
     "api.f3Desc": "Spécifiez par programmation le type de pièce et les styles de décoration (Moderne, Scandinave, etc.).",
     "api.f4Title": "Sécurisé et Haute Disponibilité",
     "api.f4Desc": "Architecture robuste avec authentification par clé API sécurisée, quotas configurables et support forte charge.",
+
+    // Affiliate
+    "affiliate.title": "Rejoignez le Programme d'Affiliation StageLumen",
+    "affiliate.subtitle": "Recommandez la plateforme d'IA de home staging virtuel de référence et gagnez 30 % de commissions récurrentes à vie.",
+    "affiliate.cta": "Devenir Partenaire Affilié",
+    "affiliate.b1Title": "30 % de Commission à Vie",
+    "affiliate.b1Desc": "Gagnez 30 % de commission récurrente sur chaque paiement effectué par les clients que vous référez, à vie.",
+    "affiliate.b2Title": "Paiements Mensuels Automatiques",
+    "affiliate.b2Desc": "Soyez payé automatiquement chaque mois directement sur votre compte bancaire ou PayPal, sans friction.",
+    "affiliate.b3Title": "Supports Marketing Fournis",
+    "affiliate.b3Desc": "Accédez à des bannières haute conversion, modèles d'e-mails et textes promotionnels pour maximiser vos ventes.",
+    "affiliate.b4Title": "Support Partenaire Dédié",
+    "affiliate.b4Desc": "Bénéficiez de l'accompagnement d'un responsable affiliation dédié pour optimiser vos campagnes.",
+    "affiliate.howTitle": "Comment ça marche",
+    "affiliate.s1": "1. Inscription : Rejoignez notre programme d'affiliation en moins de 2 minutes sur notre portail partenaire.",
+    "affiliate.s2": "2. Partage : Partagez votre lien d'affiliation personnalisé sur votre blog, réseaux sociaux ou directement auprès d'agents immobiliers.",
+    "affiliate.s3": "3. Revenus : Touchez 30 % de commission mensuelle récurrente sur chaque abonnement souscrit grâce à votre recommandation.",
   },
 };
 

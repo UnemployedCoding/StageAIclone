@@ -43,12 +43,12 @@ export default function ApiPage() {
             {t("api.subtitle")}
           </p>
           <div className="pt-4">
-            <button
-              onClick={() => alert("API developer registration form (Mock)")}
-              className="rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
+            <a
+              href="mailto:api@stagelumen.com?subject=StageLumen%20API%20Access%20Request"
+              className="inline-block rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
             >
               {t("api.cta")}
-            </button>
+            </a>
           </div>
         </div>
 

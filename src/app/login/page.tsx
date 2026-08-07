@@ -38,13 +38,18 @@ function LoginContent() {
     setError("");
     setMessage("");
 
+    const redirectUrl =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/auth/callback`
+        : `${process.env.NEXT_PUBLIC_APP_URL || ""}/auth/callback`;
+
     if (isSignUp) {
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: { full_name: name },
-          emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+          emailRedirectTo: redirectUrl,
         },
       });
       if (error) {
@@ -66,10 +71,15 @@ function LoginContent() {
   };
 
   const handleGoogleSignIn = async () => {
+    const redirectUrl =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/auth/callback`
+        : `${process.env.NEXT_PUBLIC_APP_URL || ""}/auth/callback`;
+
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+        redirectTo: redirectUrl,
       },
     });
   };
