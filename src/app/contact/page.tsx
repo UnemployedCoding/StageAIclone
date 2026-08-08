@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Send } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORMSPREE_ID";
+const FORMSPREE_ID = "mwlevbqd";
 
 export default function ContactPage() {
   const { t } = useLanguage();
@@ -20,7 +20,10 @@ export default function ContactPage() {
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           name: contactName,
           email: contactEmail,
