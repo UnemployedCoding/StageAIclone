@@ -4,21 +4,41 @@ import React, { useState } from "react";
 import { Send } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORMSPREE_ID";
+
 export default function ContactPage() {
   const { t } = useLanguage();
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent("Contact from StageLumen");
-    const body = encodeURIComponent(
-      `Name: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}`
-    );
-    window.location.href = `mailto:contact@stagelumen.com?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus("sending");
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: contactName,
+          email: contactEmail,
+          message: contactMessage,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("sent");
+        setContactName("");
+        setContactEmail("");
+        setContactMessage("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -34,7 +54,7 @@ export default function ContactPage() {
         </div>
 
         <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-sm">
-          {sent ? (
+          {status === "sent" ? (
             <div className="rounded-2xl bg-green-50 border border-green-200 p-6 text-center">
               <p className="text-green-700 font-medium">{t("contact.success")}</p>
             </div>
@@ -79,12 +99,20 @@ export default function ContactPage() {
                   className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all resize-none"
                 />
               </div>
+
+              {status === "error" && (
+                <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-center">
+                  <p className="text-red-600 text-sm font-medium">{t("contact.error")}</p>
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
+                disabled={status === "sending"}
+                className="w-full flex items-center justify-center gap-2 rounded-full bg-accent hover:bg-accent-hover disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
               >
                 <Send className="h-4 w-4" />
-                {t("contact.send")}
+                {status === "sending" ? t("contact.sending") : t("contact.send")}
               </button>
             </form>
           )}

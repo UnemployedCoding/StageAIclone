@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { Percent, DollarSign, Award, Users, Send } from "lucide-react";
+import React from "react";
+import { Percent, DollarSign, Award, Users } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function AffiliatePage() {
   const { t } = useLanguage();
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactMessage, setContactMessage] = useState("");
-  const [sent, setSent] = useState(false);
 
   const benefits = [
     {
@@ -34,15 +30,6 @@ export default function AffiliatePage() {
     },
   ];
 
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent("Contact from Affiliate Page");
-    const body = encodeURIComponent(
-      `Name: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}`
-    );
-    window.location.href = `mailto:contact@stagelumen.com?subject=${subject}&body=${body}`;
-    setSent(true);
-  };
 
   return (
     <div className="bg-slate-50 py-20 min-h-screen">
@@ -92,74 +79,9 @@ export default function AffiliatePage() {
           </div>
         </div>
 
-        {/* Contact Us */}
-        <div className="max-w-2xl mx-auto">
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-sm space-y-8">
-            <div className="text-center space-y-2">
-              <h2 className="font-display text-3xl font-bold text-primary tracking-tight">
-                {t("affiliate.contactTitle")}
-              </h2>
-            </div>
-
-            {sent ? (
-              <div className="rounded-2xl bg-green-50 border border-green-200 p-6 text-center">
-                <p className="text-green-700 font-medium">{t("affiliate.contactSuccess")}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleContactSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="contact-name" className="block text-sm font-semibold text-primary mb-1.5">
-                    {t("affiliate.contactName")}
-                  </label>
-                  <input
-                    id="contact-name"
-                    type="text"
-                    required
-                    value={contactName}
-                    onChange={(e) => setContactName(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contact-email" className="block text-sm font-semibold text-primary mb-1.5">
-                    {t("affiliate.contactEmail")}
-                  </label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    required
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contact-message" className="block text-sm font-semibold text-primary mb-1.5">
-                    {t("affiliate.contactMessage")}
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    required
-                    rows={5}
-                    value={contactMessage}
-                    onChange={(e) => setContactMessage(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
-                >
-                  <Send className="h-4 w-4" />
-                  {t("affiliate.contactSend")}
-                </button>
-              </form>
-            )}
-          </div>
         </div>
 
       </div>
     </div>
   );
 }
-

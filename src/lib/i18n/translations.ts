@@ -130,6 +130,8 @@ const translations: Record<Locale, Record<string, string>> = {
     "contact.message": "Message",
     "contact.send": "Send Message",
     "contact.success": "Your message has been sent! We'll get back to you shortly.",
+    "contact.sending": "Sending...",
+    "contact.error": "Something went wrong. Please try again or email us at contact@stagelumen.com.",
 
     // Gallery Page
     "gallery.badge": "Interactive Showcase",
@@ -435,6 +437,8 @@ const translations: Record<Locale, Record<string, string>> = {
     "contact.message": "Message",
     "contact.send": "Envoyer le message",
     "contact.success": "Votre message a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.",
+    "contact.sending": "Envoi en cours...",
+    "contact.error": "Une erreur est survenue. Veuillez réessayer ou nous écrire à contact@stagelumen.com.",
 
     // Gallery Page
     "gallery.badge": "Démonstration Interactive",
