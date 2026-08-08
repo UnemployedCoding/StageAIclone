@@ -52,6 +52,9 @@ export default function Footer() {
               <li>
                 <Link href="/#faq" className="hover:text-white transition-colors">{t("nav.faq")}</Link>
               </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors">{t("footer.contact")}</Link>
+              </li>
             </ul>
           </div>
 

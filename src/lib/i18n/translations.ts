@@ -151,6 +151,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "footer.copyright": "All rights reserved.",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Service",
+    "footer.contact": "Contact Us",
 
     // Pricing Page
     "pricing.noPlanNotice": "Please choose a subscription plan below to access your staging dashboard.",
@@ -455,6 +456,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "footer.copyright": "Tous droits réservés.",
     "footer.privacy": "Politique de confidentialité",
     "footer.terms": "Conditions d'utilisation",
+    "footer.contact": "Contactez-nous",
 
     // Pricing Page
     "pricing.noPlanNotice": "Veuillez choisir un abonnement ci-dessous pour accéder à votre tableau de bord.",
