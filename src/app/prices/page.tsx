@@ -48,7 +48,7 @@ function PricingContent() {
       name: "Base",
       description: t("pricing.baseDesc"),
       credits: 15,
-      monthlyPrice: 39,
+      monthlyPrice: 19,
       features: [
         "15 " + t("pricing.creditsPerMonth"),
         t("pricing.creditsReset"),

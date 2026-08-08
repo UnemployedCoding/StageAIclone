@@ -66,7 +66,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "features.card2.title": "Faster Listing Speeds",
     "features.card2.desc": "Upload raw photo listings and receive fully furnished versions in under 45 seconds. Stage and list the exact same day.",
     "features.card3.title": "Save Thousands of Dollars",
-    "features.card3.desc": "Physical staging can cost upwards of $2,000 per property. StageLumen stages your entire list starting at just $39.",
+    "features.card3.desc": "Physical staging can cost upwards of $2,000 per property. StageLumen stages your entire list starting at just $19.",
 
     // How It Works
     "howItWorks.title": "Staging In 3 Simple Steps",
@@ -111,11 +111,11 @@ const translations: Record<Locale, Record<string, string>> = {
     "faq.q4": "Which staging styles are available?",
     "faq.a4": "We support many design styles, including Modern, Scandinavian, Luxury, Midcentury, Coastal, Farmhouse, and Industrial.",
     "faq.q5": "Is there a free trial?",
-    "faq.a5": "We don't offer a free trial, but our plans start from as little as $39/month with no long-term commitment. You can cancel anytime.",
+    "faq.a5": "We don't offer a free trial, but our plans start from as little as $19/month with no long-term commitment. You can cancel anytime.",
 
     // Final CTA
     "cta.title": "Ready to Stun Your Home Buyers?",
-    "cta.subtitle": "Get instant virtual staging for your listings. Professional results starting at just $39/month.",
+    "cta.subtitle": "Virtual Staging by AI. Get instant, highly realistic furnished room photos in seconds. Starting at just $19/month.",
     "cta.getStarted": "Get Started",
     "cta.viewPricing": "View Pricing Plans",
     "cta.turnaround": "45-sec turnaround",
@@ -194,7 +194,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "pricing.faq.q3": "Do you offer annual discounts?",
     "pricing.faq.a3": "We currently offer monthly billing only. This gives you maximum flexibility to adjust your plan as needed without long-term commitments.",
     "pricing.faq.q4": "Is there a free trial?",
-    "pricing.faq.a4": "We don't currently offer a free trial, but our Base plan starts at just $39/month with no long-term commitment required.",
+    "pricing.faq.a4": "We don't currently offer a free trial, but our Base plan starts at just $19/month with no long-term commitment required.",
 
     // Login Page
     "login.createAccount": "Create your account",
@@ -375,7 +375,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "features.card2.title": "Publiez vos annonces plus vite",
     "features.card2.desc": "Importez vos photos brutes et obtenez des pièces entièrement meublées en moins de 45 secondes. Photographiez, meublez et publiez le jour même.",
     "features.card3.title": "Économisez des milliers d'euros",
-    "features.card3.desc": "La location de mobilier physique dépasse souvent 2 000 $ par bien. StageLumen met en valeur toutes vos annonces dès seulement 39 $ par mois.",
+    "features.card3.desc": "La location de mobilier physique dépasse souvent 2 000 $ par bien. StageLumen met en valeur toutes vos annonces dès seulement 19 $ par mois.",
 
     // How It Works
     "howItWorks.title": "Le home staging en 3 étapes simples",
@@ -420,11 +420,11 @@ const translations: Record<Locale, Record<string, string>> = {
     "faq.q4": "Quels styles de décoration sont proposés ?",
     "faq.a4": "Nous proposons de nombreux styles : Moderne, Scandinave, Luxe, Mid-century, Bord de mer, Campagne chic et Industriel.",
     "faq.q5": "Y a-t-il un engagement de durée ?",
-    "faq.a5": "Aucun. Nos forfaits démarrent à seulement 39 $/mois sans engagement à long terme. Vous pouvez annuler votre abonnement à tout moment en 1 clic.",
+    "faq.a5": "Aucun. Nos forfaits démarrent à seulement 19 $/mois sans engagement à long terme. Vous pouvez annuler votre abonnement à tout moment en 1 clic.",
 
     // Final CTA
     "cta.title": "Prêt à sublimer vos annonces immobilières ?",
-    "cta.subtitle": "Offrez à vos mandats une mise en valeur exceptionnelle. Des visuels professionnels dès 39 $/mois.",
+    "cta.subtitle": "Offrez à vos mandats une mise en valeur exceptionnelle. Des visuels professionnels dès 19 $/mois.",
     "cta.getStarted": "Commencer maintenant",
     "cta.viewPricing": "Voir les forfaits",
     "cta.turnaround": "Génération en 45 secondes",
@@ -503,7 +503,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "pricing.faq.q3": "Proposez-vous des forfaits annuels ?",
     "pricing.faq.a3": "Nous privilégions actuellement la facturation mensuelle sans engagement, afin de vous offrir une flexibilité maximale adaptée à la saisonnalité de vos mandats.",
     "pricing.faq.q4": "Y a-t-il un engagement de durée ?",
-    "pricing.faq.a4": "Aucun engagement. Notre forfait de démarrage est accessible dès 39 $/mois et vous pouvez vous désabonner en 1 clic quand vous le souhaitez.",
+    "pricing.faq.a4": "Aucun engagement. Notre forfait de démarrage est accessible dès 19 $/mois et vous pouvez vous désabonner en 1 clic quand vous le souhaitez.",
 
     // Login Page
     "login.createAccount": "Créer votre compte",
