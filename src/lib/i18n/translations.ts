@@ -286,9 +286,15 @@ const translations: Record<Locale, Record<string, string>> = {
     "affiliate.b4Title": "Dedicated Support",
     "affiliate.b4Desc": "Work with a dedicated affiliate manager to optimize your campaigns and maximize earnings.",
     "affiliate.howTitle": "How it works",
-    "affiliate.s1": "1. Sign Up: Join our affiliate program in under 2 minutes through our partner portal.",
+    "affiliate.s1": "1. Sign Up: Send us an email to apply for the affiliate program.",
     "affiliate.s2": "2. Promote: Share your unique affiliate link on your blog, social media networks, or directly with real estate agents.",
     "affiliate.s3": "3. Earn: Earn a 30% recurring monthly commission on every subscription created through your link.",
+    "affiliate.contactTitle": "Contact Us",
+    "affiliate.contactName": "Name",
+    "affiliate.contactEmail": "Email",
+    "affiliate.contactMessage": "Message",
+    "affiliate.contactSend": "Send Message",
+    "affiliate.contactSuccess": "Your message has been sent! We'll get back to you shortly.",
   },
   fr: {
     // Navbar
@@ -575,9 +581,15 @@ const translations: Record<Locale, Record<string, string>> = {
     "affiliate.b4Title": "Support Partenaire Dédié",
     "affiliate.b4Desc": "Bénéficiez de l'accompagnement d'un responsable affiliation dédié pour optimiser vos campagnes.",
     "affiliate.howTitle": "Comment ça marche",
-    "affiliate.s1": "1. Inscription : Rejoignez notre programme d'affiliation en moins de 2 minutes sur notre portail partenaire.",
+    "affiliate.s1": "1. Inscription : Envoyez-nous un e-mail pour postuler au programme d'affiliation.",
     "affiliate.s2": "2. Partage : Partagez votre lien d'affiliation personnalisé sur votre blog, réseaux sociaux ou directement auprès d'agents immobiliers.",
     "affiliate.s3": "3. Revenus : Touchez 30 % de commission mensuelle récurrente sur chaque abonnement souscrit grâce à votre recommandation.",
+    "affiliate.contactTitle": "Contactez-nous",
+    "affiliate.contactName": "Nom",
+    "affiliate.contactEmail": "Email",
+    "affiliate.contactMessage": "Message",
+    "affiliate.contactSend": "Envoyer le message",
+    "affiliate.contactSuccess": "Votre message a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.",
   },
 };
 
