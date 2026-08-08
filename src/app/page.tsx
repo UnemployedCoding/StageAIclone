@@ -527,16 +527,16 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
             <Link
-              href="/login?signUp=true"
-              className="rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all active:scale-[0.98] text-base"
+              href="/prices"
+              className="rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-[0.98] text-base"
             >
-              {t("cta.getStarted")}
+              {t("nav.subscribe")}
             </Link>
             <Link
-              href="/prices"
+              href="/gallery"
               className="rounded-full border border-slate-700 hover:border-slate-500 bg-slate-900/50 hover:bg-slate-900 text-slate-300 font-semibold px-8 py-4 transition-all text-base"
             >
-              {t("cta.viewPricing")}
+              {t("hero.cta")}
             </Link>
           </div>
 

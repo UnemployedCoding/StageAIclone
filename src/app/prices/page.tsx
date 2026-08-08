@@ -23,7 +23,7 @@ function PricingContent() {
     const { data: { session } } = await supabase.auth.getSession();
 
     if (!session) {
-      router.push(`/login?signUp=true&redirect=/prices`);
+      router.push(`/login?plan=${planName.toLowerCase()}&checkout=true`);
       return;
     }
 

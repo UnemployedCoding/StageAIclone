@@ -65,6 +65,13 @@ export async function POST(request: Request) {
           
           if (profErr) console.error("Supabase profile update error:", profErr);
 
+          // Auto-confirm user email in Supabase since payment succeeded
+          try {
+            await supabaseAdmin.auth.admin.updateUserById(userId, { email_confirm: true });
+          } catch (confirmErr) {
+            console.error("Failed to auto-confirm user in Supabase:", confirmErr);
+          }
+
           console.log(`✅ Granted ${credits} credits to user ${userId} on plan ${plan}`);
         }
       } catch (err: any) {
