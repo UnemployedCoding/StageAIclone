@@ -14,7 +14,7 @@ const supabaseAdmin = createClient(
 const PLAN_CREDITS: Record<string, number> = {
   base: 25,
   pro: 75,
-  business: 200,
+  business: 300,
 };
 
 export async function POST(request: Request) {

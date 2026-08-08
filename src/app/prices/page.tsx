@@ -78,10 +78,10 @@ function PricingContent() {
     {
       name: "Business",
       description: t("pricing.businessDesc"),
-      credits: 200,
+      credits: 300,
       monthlyPrice: 149,
       features: [
-        "200 " + t("pricing.creditsPerMonth"),
+        "300 " + t("pricing.creditsPerMonth"),
         t("pricing.rollover60"),
         t("pricing.allStyles"),
         t("pricing.hdDownloads"),
