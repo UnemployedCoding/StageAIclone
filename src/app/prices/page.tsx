@@ -47,10 +47,10 @@ function PricingContent() {
     {
       name: "Base",
       description: t("pricing.baseDesc"),
-      credits: 15,
+      credits: 25,
       monthlyPrice: 19,
       features: [
-        "15 " + t("pricing.creditsPerMonth"),
+        "25 " + t("pricing.creditsPerMonth"),
         t("pricing.creditsReset"),
         t("pricing.noRollover"),
         t("pricing.allStyles"),
@@ -63,10 +63,10 @@ function PricingContent() {
     {
       name: "Pro",
       description: t("pricing.proDesc"),
-      credits: 45,
+      credits: 75,
       monthlyPrice: 49,
       features: [
-        "45 " + t("pricing.creditsPerMonth"),
+        "75 " + t("pricing.creditsPerMonth"),
         t("pricing.rollover60"),
         t("pricing.allStyles"),
         t("pricing.hdDownloads"),
@@ -78,10 +78,10 @@ function PricingContent() {
     {
       name: "Business",
       description: t("pricing.businessDesc"),
-      credits: 150,
+      credits: 200,
       monthlyPrice: 149,
       features: [
-        "150 " + t("pricing.creditsPerMonth"),
+        "200 " + t("pricing.creditsPerMonth"),
         t("pricing.rollover60"),
         t("pricing.allStyles"),
         t("pricing.hdDownloads"),

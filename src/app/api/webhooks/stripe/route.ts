@@ -12,9 +12,9 @@ const supabaseAdmin = createClient(
 
 // Credits granted per plan (1 credit = 1 MNMLAI generation)
 const PLAN_CREDITS: Record<string, number> = {
-  base: 15,
-  pro: 45,
-  business: 150,
+  base: 25,
+  pro: 75,
+  business: 200,
 };
 
 export async function POST(request: Request) {
