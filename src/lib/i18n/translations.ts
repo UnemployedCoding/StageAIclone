@@ -122,6 +122,15 @@ const translations: Record<Locale, Record<string, string>> = {
     "cta.styles": "6+ staging styles",
     "cta.cancel": "Cancel anytime",
 
+    // Contact
+    "contact.title": "Contact Us",
+    "contact.subtitle": "Have a question or need help? Send us a message and we'll get back to you shortly.",
+    "contact.name": "Name",
+    "contact.email": "Email",
+    "contact.message": "Message",
+    "contact.send": "Send Message",
+    "contact.success": "Your message has been sent! We'll get back to you shortly.",
+
     // Gallery Page
     "gallery.badge": "Interactive Showcase",
     "gallery.titlePrefix": "See the Transformation:",
@@ -416,6 +425,15 @@ const translations: Record<Locale, Record<string, string>> = {
     "cta.turnaround": "Génération en 45 secondes",
     "cta.styles": "6+ styles de décoration",
     "cta.cancel": "Sans engagement · Annulation facile",
+
+    // Contact
+    "contact.title": "Contactez-nous",
+    "contact.subtitle": "Une question ou besoin d'aide ? Envoyez-nous un message et nous vous répondrons dans les plus brefs délais.",
+    "contact.name": "Nom",
+    "contact.email": "Email",
+    "contact.message": "Message",
+    "contact.send": "Envoyer le message",
+    "contact.success": "Votre message a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.",
 
     // Gallery Page
     "gallery.badge": "Démonstration Interactive",

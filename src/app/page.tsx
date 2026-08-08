@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Percent,
   Smile,
+  Send,
 } from "lucide-react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
@@ -102,6 +103,10 @@ export default function Home() {
   const [selectedRoom, setSelectedRoom] = useState("living-room");
   const [selectedStyle, setSelectedStyle] = useState("original");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactSent, setContactSent] = useState(false);
 
   const rooms = [
     { id: "living-room", name: t("room.livingRoom") },
@@ -508,6 +513,86 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Contact Us Section */}
+      <section id="contact" className="w-full bg-white py-20 lg:py-28 border-t border-slate-100">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center space-y-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+              {t("contact.title")}
+            </h2>
+            <p className="text-slate-600 text-base">
+              {t("contact.subtitle")}
+            </p>
+          </div>
+
+          {contactSent ? (
+            <div className="rounded-2xl bg-green-50 border border-green-200 p-6 text-center">
+              <p className="text-green-700 font-medium">{t("contact.success")}</p>
+            </div>
+          ) : (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const subject = encodeURIComponent("Contact from StageLumen");
+                const body = encodeURIComponent(
+                  `Name: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}`
+                );
+                window.location.href = `mailto:contact@stagelumen.com?subject=${subject}&body=${body}`;
+                setContactSent(true);
+              }}
+              className="space-y-5"
+            >
+              <div>
+                <label htmlFor="contact-name" className="block text-sm font-semibold text-primary mb-1.5">
+                  {t("contact.name")}
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  required
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="block text-sm font-semibold text-primary mb-1.5">
+                  {t("contact.email")}
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  required
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
+                  className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="block text-sm font-semibold text-primary mb-1.5">
+                  {t("contact.message")}
+                </label>
+                <textarea
+                  id="contact-message"
+                  required
+                  rows={5}
+                  value={contactMessage}
+                  onChange={(e) => setContactMessage(e.target.value)}
+                  className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-primary placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all resize-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
+              >
+                <Send className="h-4 w-4" />
+                {t("contact.send")}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
