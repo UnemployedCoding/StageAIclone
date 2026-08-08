@@ -17,7 +17,7 @@ const getAdminClient = () => {
 
 // Live Price IDs for StageLumen (AUD)
 const LIVE_PRICES: Record<string, string> = {
-  base: "price_1TgfhkIeq52i3OHhmgqkseGs",
+  base: "price_1U2DMCIeq52i3OHhzYDrLff5",
   pro: "price_1TnYEIIeq52i3OHhoOf0SLki",
   business: "price_1TnYFBIeq52i3OHhzYbbFKAi",
 };
