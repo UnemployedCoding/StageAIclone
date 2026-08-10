@@ -76,7 +76,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              {state.errors && state.errors.length > 0 && (
+              {state.errors && (
                 <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-center">
                   <p className="text-red-600 text-sm font-medium">{t("contact.error")}</p>
                 </div>
