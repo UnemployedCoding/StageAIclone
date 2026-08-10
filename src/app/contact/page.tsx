@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Send } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useForm } from '@formspree/react';
 
 const FORMSPREE_ID = "mwlevbqd";
 
@@ -11,38 +12,7 @@ export default function ContactPage() {
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("sending");
-
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name: contactName,
-          email: contactEmail,
-          message: contactMessage,
-        }),
-      });
-
-      if (res.ok) {
-        setStatus("sent");
-        setContactName("");
-        setContactEmail("");
-        setContactMessage("");
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
+  const [state, handleSubmit] = useForm(FORMSPREE_ID);
 
   return (
     <div className="bg-slate-50 py-20 min-h-screen">
@@ -57,7 +27,7 @@ export default function ContactPage() {
         </div>
 
         <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-sm">
-          {status === "sent" ? (
+          {state.succeeded ? (
             <div className="rounded-2xl bg-green-50 border border-green-200 p-6 text-center">
               <p className="text-green-700 font-medium">{t("contact.success")}</p>
             </div>
@@ -69,6 +39,7 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="contact-name"
+                  name="name"
                   type="text"
                   required
                   value={contactName}
@@ -82,6 +53,7 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="contact-email"
+                  name="email"
                   type="email"
                   required
                   value={contactEmail}
@@ -95,6 +67,7 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   id="contact-message"
+                  name="message"
                   required
                   rows={5}
                   value={contactMessage}
@@ -103,7 +76,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              {status === "error" && (
+              {state.errors && state.errors.length > 0 && (
                 <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-center">
                   <p className="text-red-600 text-sm font-medium">{t("contact.error")}</p>
                 </div>
@@ -111,11 +84,11 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                disabled={status === "sending"}
+                disabled={state.submitting}
                 className="w-full flex items-center justify-center gap-2 rounded-full bg-accent hover:bg-accent-hover disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold px-8 py-4 shadow-lg shadow-orange-500/20 transition-all text-base"
               >
                 <Send className="h-4 w-4" />
-                {status === "sending" ? t("contact.sending") : t("contact.send")}
+                {state.submitting ? t("contact.sending") : t("contact.send")}
               </button>
             </form>
           )}
