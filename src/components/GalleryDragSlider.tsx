@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 interface GalleryDragSliderProps {
   beforeImage: string;
@@ -14,6 +15,7 @@ export default function GalleryDragSlider({
   afterImage,
   initialPosition = 50,
 }: GalleryDragSliderProps) {
+  const { t } = useLanguage();
   const [sliderPos, setSliderPos] = useState(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,7 +87,7 @@ export default function GalleryDragSlider({
       <div className="absolute inset-0 pointer-events-none">
         <Image
           src={beforeImage}
-          alt="Original empty room"
+          alt={t("gallery.originalRoom")}
           fill
           sizes="(max-width: 1200px) 100vw, 1200px"
           priority
@@ -100,7 +102,7 @@ export default function GalleryDragSlider({
       >
         <Image
           src={afterImage}
-          alt="Staged room"
+          alt={t("gallery.stagedRoom")}
           fill
           sizes="(max-width: 1200px) 100vw, 1200px"
           priority
@@ -138,10 +140,10 @@ export default function GalleryDragSlider({
 
       {/* ── Before / After labels ── */}
       <div className="absolute top-4 left-4 z-10 rounded-md bg-black/50 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-white pointer-events-none">
-        Before
+        {t("gallery.before")}
       </div>
       <div className="absolute top-4 right-4 z-10 rounded-md bg-black/50 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-white pointer-events-none">
-        After
+        {t("gallery.after")}
       </div>
     </div>
   );

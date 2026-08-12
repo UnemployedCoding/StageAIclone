@@ -102,9 +102,24 @@ export async function POST(request: Request) {
 
           while (isProcessing && attempts < 30) {
             await new Promise(resolve => setTimeout(resolve, 2000));
-            const statusRes = await fetch(`https://api.mnmlai.dev/v1/status/${data.id}`, {
-              headers: { "Authorization": `Bearer ${apiKey}` }
-            });
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            
+            let statusRes;
+            try {
+              statusRes = await fetch(`https://api.mnmlai.dev/v1/status/${data.id}`, {
+                headers: { "Authorization": `Bearer ${apiKey}` },
+                signal: controller.signal
+              });
+              clearTimeout(timeoutId);
+            } catch (pollErr) {
+              clearTimeout(timeoutId);
+              console.error(`Polling fetch error (attempt ${attempts + 1}):`, pollErr);
+              attempts++;
+              continue;
+            }
+
             if (!statusRes.ok) {
               attempts++;
               continue;

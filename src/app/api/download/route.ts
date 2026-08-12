@@ -9,6 +9,29 @@ export async function GET(request: Request) {
   }
 
   try {
+    const urlObj = new URL(imageUrl);
+    if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
+      return new NextResponse("Invalid protocol", { status: 400 });
+    }
+    
+    // Prevent fetching from local networks (basic SSRF protection)
+    const hostname = urlObj.hostname;
+    if (
+      hostname === 'localhost' || 
+      hostname === '127.0.0.1' || 
+      hostname === '::1' || 
+      hostname.startsWith('10.') || 
+      hostname.startsWith('192.168.') || 
+      hostname.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./) ||
+      hostname === '169.254.169.254'
+    ) {
+      return new NextResponse("Forbidden domain", { status: 403 });
+    }
+  } catch (error) {
+    return new NextResponse("Invalid URL", { status: 400 });
+  }
+
+  try {
     const response = await fetch(imageUrl);
     if (!response.ok) {
       throw new Error(`Failed to fetch image: ${response.statusText}`);

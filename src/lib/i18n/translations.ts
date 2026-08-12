@@ -139,6 +139,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "gallery.titleSuffix": "Before & After Gallery",
     "gallery.title": "See the Transformation: Before & After Gallery",
     "gallery.subtitle": "See how StageLumen transforms unappealing spaces into attractive, listing-ready homes in seconds.",
+    "gallery.before": "Before",
+    "gallery.after": "After",
+    "gallery.originalRoom": "Original empty room",
+    "gallery.stagedRoom": "Staged room",
 
     // Footer
     "footer.desc": "Transform empty rooms into fully-furnished spaces in seconds. Affordable, beautiful virtual staging designed for real estate professionals.",
@@ -446,8 +450,12 @@ const translations: Record<Locale, Record<string, string>> = {
     "gallery.badge": "Démonstration Interactive",
     "gallery.titlePrefix": "Découvrez la transformation :",
     "gallery.titleSuffix": "Galerie Avant / Après",
-    "gallery.title": "Découvrez la transformation : Galerie Avant / Après",
-    "gallery.subtitle": "Découvrez comment StageLumen transforme des pièces vides en logements irrésistibles en quelques secondes.",
+    "gallery.title": "Voyez la Transformation : Avant / Après",
+    "gallery.subtitle": "Découvrez comment StageLumen transforme des espaces sans attrait en biens prêts à être visités en quelques secondes.",
+    "gallery.before": "Avant",
+    "gallery.after": "Après",
+    "gallery.originalRoom": "Pièce vide d'origine",
+    "gallery.stagedRoom": "Pièce aménagée",
 
     // Footer
     "footer.desc": "Transformez vos pièces vides en espaces meublés et chaleureux en quelques secondes. Le home staging virtuel nouvelle génération conçu pour les professionnels de l'immobilier.",
