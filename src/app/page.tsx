@@ -162,7 +162,7 @@ export default function Home() {
               </h1>
               <div className="space-y-4 max-w-lg mx-auto lg:mx-0">
                 <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-                  {t("hero.stat1")} <span className="font-bold text-primary">{t("hero.stat1Bold")}</span>{t("hero.stat1End")} <span className="font-bold text-primary">{t("hero.stat1Cost")}</span> {t("hero.stat1CostEnd")}
+                  {t("hero.stat1")} <span className="font-bold text-primary">{t("hero.stat1Bold")}</span>{t("hero.stat1End")} <span className="font-bold text-primary whitespace-nowrap">{t("hero.stat1Cost")}</span>{"\u00A0"}{t("hero.stat1CostEnd")}
                 </p>
                 <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-medium">
                   <span className="font-display italic text-accent">{t("hero.subtitleItalic")}</span>{" "}{t("hero.subtitle")}

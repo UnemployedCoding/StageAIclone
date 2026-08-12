@@ -80,6 +80,14 @@ export default function Navbar() {
     router.refresh();
   };
 
+  const handleSeeDemo = () => {
+    if (pathname === "/gallery") {
+      router.refresh();
+    } else {
+      router.push("/gallery");
+    }
+  };
+
   const navLinks = [
     { name: t("nav.home"), href: "/" },
     { name: t("nav.gallery"), href: "/gallery" },
@@ -158,13 +166,13 @@ export default function Navbar() {
               isSubscribed ? (
                 /* Logged In & Subscribed: Show eye-catching Dashboard + Sign Out */
                 <>
-                  <Link
-                    href="/gallery"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 lg:px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
+                  <button
+                    onClick={handleSeeDemo}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 lg:px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
                   >
                     <Sparkles className="h-3.5 w-3.5 fill-current animate-pulse text-accent" />
                     <span>{t("nav.seeDemo")}</span>
-                  </Link>
+                  </button>
 
                   <Link
                     href="/dashboard"
@@ -186,13 +194,13 @@ export default function Navbar() {
               ) : (
                 /* Logged In but NOT Subscribed: Show See Demo + Subscribe + Sign Out (No Dashboard) */
                 <>
-                  <Link
-                    href="/gallery"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 lg:px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
+                  <button
+                    onClick={handleSeeDemo}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 lg:px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
                   >
                     <Sparkles className="h-3.5 w-3.5 fill-current animate-pulse text-accent" />
                     <span>{t("nav.seeDemo")}</span>
-                  </Link>
+                  </button>
 
                   <Link
                     href="/prices"
@@ -213,13 +221,13 @@ export default function Navbar() {
               /* Guest (Not Logged In): Show See Demo + Sign In + Subscribe */
               <>
                 {/* See Demo */}
-                <Link
-                  href="/gallery"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 lg:px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0"
+                <button
+                  onClick={handleSeeDemo}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 text-accent hover:bg-orange-100 hover:border-orange-300 text-sm font-bold px-3.5 lg:px-4 py-2 shadow-sm transition-all hover:scale-105 active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
                 >
                   <Sparkles className="h-3.5 w-3.5 fill-current animate-pulse text-accent" />
                   <span>{t("nav.seeDemo")}</span>
-                </Link>
+                </button>
 
                 {/* Sign In */}
                 <Link
@@ -291,14 +299,13 @@ export default function Navbar() {
                     <LayoutDashboard className="h-5 w-5" />
                     {t("nav.dashboard")}
                   </Link>
-                  <Link
-                    href="/gallery"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent"
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); handleSeeDemo(); }}
+                    className="flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent cursor-pointer"
                   >
                     <Sparkles className="h-4 w-4 fill-current animate-pulse text-accent" />
                     <span>{t("nav.seeDemo")}</span>
-                  </Link>
+                  </button>
                   <button
                     onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
                     className="flex justify-center rounded-xl border border-slate-200 py-2.5 text-base font-semibold text-slate-600 hover:text-red-500 transition-colors cursor-pointer"
@@ -315,14 +322,13 @@ export default function Navbar() {
                   >
                     {t("nav.subscribe")}
                   </Link>
-                  <Link
-                    href="/gallery"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors"
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); handleSeeDemo(); }}
+                    className="flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors cursor-pointer"
                   >
                     <Sparkles className="h-4 w-4 fill-current animate-pulse text-accent" />
                     <span>{t("nav.seeDemo")}</span>
-                  </Link>
+                  </button>
                   <button
                     onClick={() => { handleSignOut(); setMobileMenuOpen(false); }}
                     className="flex justify-center rounded-xl border border-slate-200 py-2.5 text-base font-semibold text-slate-600 hover:text-red-500 transition-colors cursor-pointer"
@@ -340,14 +346,13 @@ export default function Navbar() {
                 >
                   {t("nav.subscribe")}
                 </Link>
-                <Link
-                  href="/gallery"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors"
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleSeeDemo(); }}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-orange-50 py-2.5 text-base font-bold text-accent hover:bg-orange-100 transition-colors cursor-pointer"
                 >
                   <Sparkles className="h-4 w-4 fill-current animate-pulse text-accent" />
                   <span>{t("nav.seeDemo")}</span>
-                </Link>
+                </button>
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
