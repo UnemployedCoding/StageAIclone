@@ -82,7 +82,7 @@ export default function Navbar() {
 
   const handleSeeDemo = () => {
     if (pathname === "/gallery") {
-      router.refresh();
+      window.location.reload();
     } else {
       router.push("/gallery");
     }
